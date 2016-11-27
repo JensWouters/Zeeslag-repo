@@ -6,6 +6,7 @@ import controller.Controller;
 import view.ZeeslagFrame;
 
 public class Launcher {
+	private String anders;
 
 	public static void main(String[] args) {
 		ZeeslagFrame bord = new ZeeslagFrame();
