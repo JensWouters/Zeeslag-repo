@@ -2,7 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
@@ -22,7 +22,18 @@ public class ZeeslagFrame extends JFrame {
 		super();
 		this.setSize( 900, 500 );
 		this.setResizable(false);
-		this.setLayout(new GridLayout());
+		this.setLayout(new GridBagLayout());
+		
+		JComboBox schepen = new JComboBox(Schip.values());
+		schepen.setSelectedIndex(0);
+		this.add(schepen);
+		
+		this.setVisible(true);
+		JRadioButton horizontaal = new JRadioButton("Horizontaal");
+		JRadioButton verticaal = new JRadioButton("Verticaal");
+		this.add(horizontaal);
+		this.add(verticaal);
+		
 		player1 = new JLabel(JOptionPane.showInputDialog("Player1 geef je username op:"));
 		this.add(player1);
 		board1 = new ControlPanel(40,10);
@@ -39,15 +50,7 @@ public class ZeeslagFrame extends JFrame {
 		board2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.add(board2);
 		
-		JComboBox schepen = new JComboBox(Schip.values());
-		schepen.setSelectedIndex(0);
-		this.add(schepen);
 		
-		this.setVisible(true);
-		JRadioButton horizontaal = new JRadioButton("Horizontaal");
-		JRadioButton verticaal = new JRadioButton("Verticaal");
-		this.add(horizontaal);
-		this.add(verticaal);
 	}
 	
 	 public ControlPanel getBoard1(){
