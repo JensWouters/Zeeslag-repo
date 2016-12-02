@@ -5,8 +5,11 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import domain.Schip;
 
 public class ZeeslagFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -31,6 +34,9 @@ public class ZeeslagFrame extends JFrame {
 		board2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.add(board2);
 		
+		JComboBox schepen = new JComboBox(Schip.values());
+		schepen.setSelectedIndex(0);
+		this.add(schepen);
 	}
 	
 	 public ControlPanel getBoard1(){
