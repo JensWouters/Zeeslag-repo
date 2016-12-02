@@ -9,7 +9,7 @@ public class Vierkant {
 	private int x,y,zijde;
 	private Color kleur;
 	public boolean bezet;
-	private String anders;
+	
 	
 	public Vierkant(int x, int y, int zijde, Color kleur) {
 		super();
