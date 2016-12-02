@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -42,6 +43,11 @@ public class ZeeslagFrame extends JFrame {
 		JComboBox schepen = new JComboBox(Schip.values());
 		schepen.setSelectedIndex(0);
 		this.add(schepen);
+		
+		JCheckBox horizontaal = new JCheckBox("Horizontaal");
+		JCheckBox verticaal = new JCheckBox("Verticaal");
+		this.add(horizontaal);
+		this.add(verticaal);
 	}
 	
 	 public ControlPanel getBoard1(){
