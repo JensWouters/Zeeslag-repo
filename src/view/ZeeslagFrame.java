@@ -7,16 +7,21 @@ import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class ZeeslagFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private ControlPanel board1, board2 = new ControlPanel(40,10);
+	private JLabel player1, player2;
 
 	public ZeeslagFrame(){
 		super();
 		this.setSize( 900, 500 );
 		this.setResizable(false);
 		this.setLayout(null);
+		player1 = new JLabel(JOptionPane.showInputDialog("Player1 geef je username op:"));
+		player1.setVisible(true);
+		this.add(player1);
 		board1 = new ControlPanel(40,10);
 		board1.setBackground(Color.GRAY);
 		board1.setSize(new Dimension(400, 400));

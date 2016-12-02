@@ -15,14 +15,10 @@ import domain.Vierkant;
 public class ControlPanel extends JPanel {
 
 private List<Vierkant> vierkanten = new ArrayList<Vierkant>();
-private JLabel username;
 	
 	public ControlPanel(int zijde, int aantal){//, KnopController controller){
 		int y = 0;
 		int x = 0;
-		
-		username = new JLabel(JOptionPane.showInputDialog("Geef je username op"));
-		this.add(username);
 		
 		for (int i = 0; i < aantal;i++){
 			for (int j = 0; j < aantal; j++){
