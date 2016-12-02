@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import domain.Vierkant;
 
 public class ControlPanel extends JPanel {
-	private String anders;
 
 private List<Vierkant> vierkanten = new ArrayList<Vierkant>();
 	

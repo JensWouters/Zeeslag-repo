@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class ZeeslagFrame extends JFrame {
-	private String anders;
 	private static final long serialVersionUID = 1L;
 	private ControlPanel board1, board2 = new ControlPanel(40,10);
 	private JLabel name, computer;

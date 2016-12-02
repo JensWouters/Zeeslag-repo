@@ -8,7 +8,6 @@ import view.ZeeslagFrame;
 
 public class Controller {
 private ZeeslagFrame view;
-private String anders;
 	
 	public Controller(ZeeslagFrame view){
 		this.view = view;
