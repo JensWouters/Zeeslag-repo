@@ -12,11 +12,11 @@ import javax.swing.JPanel;
 
 import domain.Vierkant;
 
-public class ControlPanel extends JPanel {
+public class BordPanel extends JPanel {
 
 private List<Vierkant> vierkanten = new ArrayList<Vierkant>();
 	
-	public ControlPanel(int zijde, int aantal){//, KnopController controller){
+	public BordPanel(int zijde, int aantal){//, KnopController controller){
 		int y = 0;
 		int x = 0;
 		
