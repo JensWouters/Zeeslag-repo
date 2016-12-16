@@ -8,6 +8,7 @@ import view.ZeeslagFrame;
 
 public class Controller {
 private ZeeslagFrame view;
+private Positie positie;
 	
 	public Controller(ZeeslagFrame view){
 		this.view = view;

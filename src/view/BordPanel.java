@@ -47,5 +47,9 @@ private List<Vierkant> vierkanten = new ArrayList<Vierkant>();
 	    	  vierkant.paint(g);
 	      }
 	  }
+	 
+	 public void plaatsSchip(Richting richting, SchipType schipType, Positie positie) {
+		 //
+	 }
 	
 }
