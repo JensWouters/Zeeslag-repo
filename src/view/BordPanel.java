@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import domain.Positie;
+import domain.Richting;
+import domain.Schip;
 import domain.Vierkant;
 
 public class BordPanel extends JPanel {
@@ -47,5 +50,19 @@ private List<Vierkant> vierkanten = new ArrayList<Vierkant>();
 	    	  vierkant.paint(g);
 	      }
 	  }
+	 
+	 public void plaatsSchip(Richting richting, Schip schip, Positie positie){
+		 int size = schip.getSize();
+		 if(richting == richting.HORIZONTAAL)
+		 {
+			for(int i = 0; i<positie.getY(); i++)
+			{
+				for(int j = 0; j<size; j++)
+				{
+					
+				}
+			}
+		 }
+	 }
 	
 }

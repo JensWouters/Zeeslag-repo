@@ -1,9 +1,10 @@
 package domain;
 
+import view.BordPanel;
+
 public interface ServiceInterface {
 
-	public plaatsSchip(Richting, schip, Positie positie)
-	{
-		
-	}
+	public void plaatsSchip(Richting richting, Schip schip, Positie positie);
+	
+	public BordPanel getBord();
 }
