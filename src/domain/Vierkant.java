@@ -46,4 +46,8 @@ public class Vierkant {
 		}	   
 		return aangeklikt;		
 	}
+	
+	public void setBezet() {
+		this.bezet = true;
+	}
 }

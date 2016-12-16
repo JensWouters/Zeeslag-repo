@@ -1,6 +1,6 @@
 package domain;
 
-public enum Schip 
+public enum SchipType 
 {
 	VLIEGDEKSCHIP(5),
 	SLAGSCHIP(4),
@@ -10,7 +10,7 @@ public enum Schip
 	
 	private int size;
 	
-	private Schip(int size)
+	private SchipType(int size)
 	{
 		this.size = size;
 	}

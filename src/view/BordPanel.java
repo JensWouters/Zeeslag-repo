@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 import domain.Positie;
 import domain.Richting;
-import domain.Schip;
+import domain.SchipType;
 import domain.Vierkant;
 
 public class BordPanel extends JPanel {
@@ -51,7 +51,7 @@ private List<Vierkant> vierkanten = new ArrayList<Vierkant>();
 	      }
 	  }
 	 
-	 public void plaatsSchip(Richting richting, Schip schip, Positie positie){
+	 public void plaatsSchip(Richting richting, SchipType schip, Positie positie){
 		 int size = schip.getSize();
 		 if(richting == richting.HORIZONTAAL)
 		 {
@@ -63,6 +63,6 @@ private List<Vierkant> vierkanten = new ArrayList<Vierkant>();
 				}
 			}
 		 }
-	 }
 	
+}
 }

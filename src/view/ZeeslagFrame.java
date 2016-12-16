@@ -11,13 +11,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-import domain.Schip;
+import domain.Richting;
+import domain.SchipType;
 
 public class ZeeslagFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private BordPanel board1, board2 = new BordPanel(40,10);
 	private JLabel player1, player2;
 	private JPanel mainPanel = new JPanel();
+	private JComboBox schepen = new JComboBox(SchipType.values());
+	private JRadioButton horizontaal = new JRadioButton("Horizontaal");
+	private JRadioButton verticaal = new JRadioButton("Verticaal");
 
 	public ZeeslagFrame(){
 		super();
@@ -37,14 +41,11 @@ public class ZeeslagFrame extends JFrame {
 		beschikbaar.setLocation(10, 10);
 		controlPanel.add(beschikbaar);
 
-		JComboBox schepen = new JComboBox(Schip.values());
 		schepen.setSelectedIndex(0);
 		controlPanel.add(schepen);
 		
 		JLabel richting = new JLabel("Richting");
 		controlPanel.add(richting);
-		JRadioButton horizontaal = new JRadioButton("Horizontaal");
-		JRadioButton verticaal = new JRadioButton("Verticaal");
 		controlPanel.add(horizontaal);
 		controlPanel.add(verticaal);
 		mainPanel.add(controlPanel);
@@ -71,5 +72,16 @@ public class ZeeslagFrame extends JFrame {
 	 
 	 public BordPanel getBoard2(){
 		 return board2;
+	 }
+	 
+	 public SchipType getSchip() {
+		 return (SchipType) schepen.getSelectedItem();
+	 }
+	 
+	 public Richting getRichting() {
+		 if (horizontaal.isSelected()) {
+			 return Richting.HORIZONTAAL;
+		 }
+		 else return Richting.VERTICAAL;
 	 }
 }

@@ -4,10 +4,12 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import domain.Positie;
 import view.ZeeslagFrame;
 
 public class Controller {
 private ZeeslagFrame view;
+private Positie positie;
 	
 	public Controller(ZeeslagFrame view){
 		this.view = view;

@@ -6,7 +6,7 @@ public class Service implements ServiceInterface {
 	
 	private BordPanel bord;
 
-	public void plaatsSchip(Richting richting, Schip schip, Positie positie) {
+	public void plaatsSchip(Richting richting, SchipType schip, Positie positie) {
 		bord.plaatsSchip(richting, schip, positie);
 	}
 
