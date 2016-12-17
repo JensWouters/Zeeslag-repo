@@ -3,7 +3,7 @@ package domain;
 public enum SchipType {
 	Vliegdekschip(5),
 	Slagschip(4),
-	Onderzeeër(3),
+	Onderzeeer(3),
 	Torpedobootjager(3),
 	Patrouilleschip(2);
 	

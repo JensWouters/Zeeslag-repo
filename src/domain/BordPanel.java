@@ -15,7 +15,7 @@ public class BordPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private Board bord;
 	private int schepenOpBord = 0;
-	private List<String> schepen = new ArrayList<String>(Arrays.asList("vliegdekschip", "slagschip", "slagschip", "onderzeeër", "onderzeeër", "onderzeeër",
+	private List<String> schepen = new ArrayList<String>(Arrays.asList("vliegdekschip", "slagschip", "slagschip", "onderzeeer", "onderzeeer", "onderzeeer",
             "torpedobootjager", "torpedobootjager", "torpedobootjager", "patrouilleschip", "patrouilleschip", "patrouilleschip", "patrouilleschip"));
 	
 	public BordPanel(int zijde, int aantal) {//, KnopController controller){
@@ -51,6 +51,17 @@ public class BordPanel extends JPanel{
 	      }
 	  }
 	 
+	 public int getNummer(Positie positie) {
+		 List<Vierkant> vierkanten = this.getVierkanten();
+		 int nr = 0;
+		 for (int i = 0; i < vierkanten.size(); i++) {
+			 if (vierkanten.get(i).isAangeklikt(positie.getX(), positie.getY())) {
+				nr = i;
+			 }
+		 } 
+		 return nr;
+	 }
+	 
 	 //Extra Controle Functies
 	 
 	 public boolean isAvailable(SchipType schip) {
@@ -78,14 +89,7 @@ public class BordPanel extends JPanel{
 	 }
 	 
 	 public boolean fitsBoardVertical(Richting richting, SchipType schip, Positie positie) {
-		 List<Vierkant> vierkanten = this.getVierkanten();
-		 int nr = -1;
-		 for (int i = 0; i < vierkanten.size(); i++) {
-			 if (vierkanten.get(i).isAangeklikt(positie.getX(), positie.getY())) {
-				nr = i; 
-			 }
-		 }
-		 
+		 int nr = getNummer(positie);
 		 if (richting.equals(Richting.VERTICAAL)) {
 			 if ((nr+1 % 10) == 0) {
 				 return false;
@@ -102,91 +106,91 @@ public class BordPanel extends JPanel{
 		 return true;
 	 }
 	 
-	 public boolean doesOverlap(Richting richting, SchipType schip, Positie positie) {
-		List<Vierkant> vierkanten = this.getVierkanten();
-		int nr = -1;
-		for (int i = 0; i < vierkanten.size(); i++) {
-			 if (vierkanten.get(i).isAangeklikt(positie.getX(), positie.getY())) {
-				 nr = i;
-				 if (richting.equals(Richting.HORIZONTAAL)) {
-					 for (int j = 0; j < schip.getSize(); j++) {
-						 if (vierkanten.get(nr).getBezet()) {
-							 return true;
-						 }
-						 nr += 10;
-					 }
+	 public boolean fitsBoardHorizontal(Richting richting, SchipType schip, Positie positie) {
+		 int nr = getNummer(positie);
+		 if (richting.equals(Richting.HORIZONTAAL)) {
+			 for (int j = 0; j < schip.getSize(); j++) {
+				 if (nr >= 100) {
+					 return false;
 				 }
-				 else if (richting.equals(Richting.VERTICAAL)) {
-					 for (int j = 0; j< schip.getSize(); j++) {
-						 if (vierkanten.get(nr).getBezet()) {
-							 return true;
-						 }
-						 nr++;
-					 }
-				 }
+				 nr += 10;
 			 }
 		 }
+		
+		 return true;
+	 }
+	 
+	 public boolean overlapsShip(Richting richting, SchipType schip, Positie positie) {
+		List<Vierkant> vierkanten = this.getVierkanten();
+		int nr = getNummer(positie);
+		if (richting.equals(Richting.HORIZONTAAL)) {
+			 for (int j = 0; j < schip.getSize(); j++) {
+				 if (vierkanten.get(nr).getBezet()) {
+					 return true;
+				 }
+				 nr += 10;
+			 }
+		} else if (richting.equals(Richting.VERTICAAL)) {
+			 for (int j = 0; j< schip.getSize(); j++) {
+				 if (vierkanten.get(nr).getBezet()) {
+					 return true;
+				 }
+				 nr++;
+			 }
+		}
+			
 		return false;
 	 }
 	 
 	 public void setOmliggendeBezet(int nr) {
 		 List<Vierkant> vierkanten = this.getVierkanten();
-		 
+		 vierkanten.get(nr).setBezet();
+	 	 try {
 		 vierkanten.get(nr-10).setBezet();
+	 	 } catch (IndexOutOfBoundsException e) {}
+		 try {
 		 vierkanten.get(nr+10).setBezet();
+		 } catch (IndexOutOfBoundsException e) {}
+		 try {
 		 vierkanten.get(nr-1).setBezet();
+		 } catch (IndexOutOfBoundsException e) {}
+		 try {
 		 vierkanten.get(nr+1).setBezet();
-		 vierkanten.get(nr-11).setBezet();
-		 vierkanten.get(nr+11).setBezet();
+		 } catch (IndexOutOfBoundsException e) {}
+		 try {
 		 vierkanten.get(nr-9).setBezet();
+		 } catch (IndexOutOfBoundsException e) {}
+		 try {
 		 vierkanten.get(nr+9).setBezet();
+		 } catch (IndexOutOfBoundsException e) {}
+		 try {
+		 vierkanten.get(nr-11).setBezet();
+		 } catch (IndexOutOfBoundsException e) {}
+		 try {
+		 vierkanten.get(nr+11).setBezet();
+		 } catch (IndexOutOfBoundsException e) {}
 	 }
 	 
 	 // Einde controle functies
 	 
 	 public void plaatsSchip(Richting richting, SchipType schip, Positie positie) {
-		 List<Vierkant> vierkanten = this.getVierkanten();
-		 int x = positie.getX();
-		 int y = positie.getY();
-		 int nr = -1;
-		 int counter = 0;
+		 int nr = getNummer(positie);
 		 if (schepenOpBord < 5) {
-			 if (fitsBoardVertical(richting, schip, positie)) {
-				 if (!doesOverlap(richting, schip, positie)) {
+			 if (fitsBoardVertical(richting, schip, positie) && fitsBoardHorizontal(richting, schip, positie)) {
+				 if (!overlapsShip(richting, schip, positie)) {
 					 if (isAvailable(schip)) {	
-						 for (int i = 0; i < vierkanten.size(); i++) {
-							 if (vierkanten.get(i).isAangeklikt(x, y)) {
-								 nr = i;
-								 if (richting.equals(Richting.HORIZONTAAL)) {
-									 for (int j = 0; j < schip.getSize(); j++) {
-										 System.out.println(nr);
-										 try {
-											 counter++;
-											 this.setKleur(nr, Color.WHITE);
-										 } catch (IndexOutOfBoundsException e) {
-											 JOptionPane.showMessageDialog(null, "Dit pas niet op het bord!");
-											 makeAvailable(schip);
-											 nr = i;
-											 for (int l = 0; l <= counter; l++) {
-												 this.setKleur(nr, Color.LIGHT_GRAY);
-												 nr+= 10;
-											 }
-											 break;
-										 }
-										 setOmliggendeBezet(nr);
-										 vierkanten.get(nr).setBezet();
-										 nr += 10;
-									 }
-								 }
-								 else if (richting.equals(Richting.VERTICAAL)) {
-									 for (int j = 0; j< schip.getSize(); j++) {
-										 System.out.println(nr);
-										 this.setKleur(nr, Color.WHITE);
-										 setOmliggendeBezet(nr);
-										 vierkanten.get(nr).setBezet();
-										 nr++;
-									 }
-								 }
+						 if (richting.equals(Richting.HORIZONTAAL)) {
+							 for (int j = 0; j < schip.getSize(); j++) {
+								 this.setKleur(nr, Color.WHITE);
+								 setOmliggendeBezet(nr);
+								 nr += 10;
+							 }
+						 }
+						 else if (richting.equals(Richting.VERTICAAL)) {
+							 for (int j = 0; j< schip.getSize(); j++) {
+								 this.setKleur(nr, Color.WHITE);
+								 setOmliggendeBezet(nr);
+								 nr++;
 							 }
 						 }
 						 schepenOpBord++;
