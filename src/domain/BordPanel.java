@@ -1,4 +1,4 @@
-package view;
+package domain;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,19 +7,10 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import domain.Board;
-import domain.Positie;
-import domain.Richting;
-import domain.SchipType;
-import domain.Vierkant;
+public class BordPanel extends JPanel{
 
-public class BordPanel extends JPanel {
-
-/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-private Board bord;
+	private Board bord;
 	
 	public BordPanel(int zijde, int aantal) {//, KnopController controller){
 		bord = new Board(zijde, aantal);
@@ -27,6 +18,10 @@ private Board bord;
 	
 	public void addMouseClickListener(MouseListener listener){
 		this.addMouseListener(listener);
+	}
+	
+	public Board getBoard() {
+		return this.bord;
 	}
 	
 	public List<Vierkant> getVierkanten(){
@@ -46,5 +41,28 @@ private Board bord;
 	      }
 	  }
 	 
-	 
+	 public void plaatsSchip(Richting richting, SchipType schip, Positie positie) {
+		 List<Vierkant> vierkanten = this.getVierkanten();
+		 int x = positie.getX();
+		 int y = positie.getY();
+		 int nr = -1;
+		 for (int i = 0; i < vierkanten.size(); i++) {
+			 if (vierkanten.get(i).isAangeklikt(x, y)) {
+				 nr = i;
+				 if (richting.equals(Richting.HORIZONTAAL)) {
+					 for (int j = 0; j < schip.getSize(); j++) {
+						 this.setKleur(nr, Color.WHITE);
+						 nr += 10;
+					 }
+				 }
+				 else if (richting.equals(Richting.VERTICAAL)) {
+					 for (int j = 0; j< schip.getSize(); j++) {
+						 this.setKleur(nr, Color.WHITE);
+						 nr++;
+					 }
+				 }
+			 }
+		 }
+	 }
+
 }

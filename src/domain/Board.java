@@ -23,29 +23,4 @@ public class Board {
 		return vierkanten;
 	}
 
-	public void plaatsSchip(Richting richting, SchipType schip, Positie positie) {
-		List<Vierkant> vierkanten = this.getVierkanten();
-		
-		if (richting.equals(Richting.HORIZONTAAL)) {
-			for (Vierkant v : vierkanten) {
-				if (v.getPositie() == positie) {
-					for (int i = 0; i < schip.getSize(); i++) {
-						vierkanten.get(i).setBezet();
-						vierkanten.get(i).setKleur(Color.GREEN);
-					}
-				}
-			}
-		} else if (richting.equals(Richting.VERTICAAL)) {
-			for (Vierkant v : vierkanten) {
-				if (v.getPositie() == positie) {
-					for (int i = 0; i < schip.getSize()*10; i++) {
-						vierkanten.get(i).setBezet();
-						
-						vierkanten.get(i).setKleur(Color.GREEN);
-						i+= 10;
-					}
-				}
-			}
-		}
-	}
 }

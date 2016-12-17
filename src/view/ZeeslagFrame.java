@@ -13,27 +13,27 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import domain.BordPanel;
 import domain.Richting;
 import domain.SchipType;
 
 public class ZeeslagFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private BordPanel board1, board2 = new BordPanel(40,10);
+	private BordPanel board1, board2;
 	private JLabel player1, player2;
 	private JPanel mainPanel = new JPanel();
-	private JComboBox schepen = new JComboBox(SchipType.values());
+	private JComboBox<SchipType> schepen = new JComboBox<SchipType>(SchipType.values());
 	private JRadioButton horizontaal = new JRadioButton("Horizontaal");
 	private JRadioButton verticaal = new JRadioButton("Verticaal");
 
-	public ZeeslagFrame(){
+	public ZeeslagFrame(BordPanel bord, BordPanel bordOpponant){
 		super();
 		this.setSize( 800, 300 );
 		this.setResizable(false);
 		this.setContentPane(mainPanel);
-		
 		mainPanel.setLayout(new GridLayout(1,3));
 		addControlPanel();
-		addPlayerBoards();
+		addPlayerBoards(bord, bordOpponant);
 	}
 	
 	public void addControlPanel() {
@@ -59,25 +59,22 @@ public class ZeeslagFrame extends JFrame {
 		mainPanel.add(controlPanel);
 	}
 	
-	public void addPlayerBoards() {
-		player1 = new JLabel(JOptionPane.showInputDialog("player1, username?"));
-
-		board1 = new BordPanel(25,10);
+	public void addPlayerBoards(BordPanel bord, BordPanel bordOpponant) {
+		
+		player1 = new JLabel(JOptionPane.showInputDialog("player1, username?")); 
+		board1 = bord;
 		board1.setBackground(Color.GRAY);
 		board1.setSize(new Dimension(400,400));
 		board1.setLocation(25,50);
 		board1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		board1.add(player1);
 		mainPanel.add(board1);
 		
 		player2 = new JLabel("Computer");
-		
-		board2 = new BordPanel(25,10);
+		board2 = bordOpponant;
 		board2.setBackground(Color.GRAY);
 		board2.setSize(new Dimension(400,400));
 		board2.setLocation(475,50);
 		board2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		board2.add(player2);
 		mainPanel.add(board2);
 	}
 	 public BordPanel getBoard1(){
@@ -101,15 +98,15 @@ public class ZeeslagFrame extends JFrame {
 	 
 	 public SchipType getSchipType() {
 		 	if (schepen.getSelectedIndex() == 0) {
-		 		return SchipType.VLIEGDEKSCHIP;
+		 		return SchipType.Vliegdekschip;
 		 	} else if (schepen.getSelectedIndex() == 1) {
-		 		return SchipType.SLAGSCHIP;
+		 		return SchipType.Slagschip;
 		 	} else if (schepen.getSelectedIndex() == 2) {
-		 		return SchipType.ONDERZEEER;
+		 		return SchipType.Onderzeeer;
 		 	} else if (schepen.getSelectedIndex() == 3) {
-		 		return SchipType.TORPEDOBOOTJAGER;
+		 		return SchipType.Torpedobootjager;
 		 	} else if (schepen.getSelectedIndex() == 4) {
-		 		return SchipType.PATROUILLESCHIP;
+		 		return SchipType.Patrouilleschip;
 		 	}
 			return null;
 	 }

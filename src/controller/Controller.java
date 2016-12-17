@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JFrame;
+
 import domain.Positie;
 import domain.Service;
 import domain.ServiceInterface;
@@ -13,19 +15,16 @@ public class Controller {
 private ZeeslagFrame view;
 private ServiceInterface service = new Service();
 	
-	public Controller(ZeeslagFrame view){
-		this.view = view;
-		view.getBoard1().addMouseClickListener(new PlaatsSchipHandler());
-		view.getBoard1().addMouseClickListener(new MouseClickHandler());
+	public Controller(){
+		view = new ZeeslagFrame(service.getBord(), service.getBordOpponant());
+		view.setVisible(true);
+		view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		service.getBord().addMouseClickListener(new PlaatsSchipHandler());
 	}
 	
 	private class PlaatsSchipHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event) {
-			int x = event.getX();
-			int y = event.getY();
-			
-			Positie positie = new Positie(x, y);
-			
+			Positie positie = new Positie(event.getX(), event.getY());
 			service.plaatsSchip(view.getRichting(), view.getSchip(), positie);
 		}
 	}
