@@ -3,7 +3,7 @@ package domain;
 public enum SchipType {
 	Vliegdekschip(5),
 	Slagschip(4),
-	Onderzeeer(3),
+	Onderzeeër(3),
 	Torpedobootjager(3),
 	Patrouilleschip(2);
 	
@@ -15,6 +15,11 @@ public enum SchipType {
 	
 	public int getSize() {
 		return this.size;
+	}
+	
+	@Override
+	public String toString() {
+		return name().toLowerCase();
 	}
 	
 }

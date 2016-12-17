@@ -51,6 +51,7 @@ public class ZeeslagFrame extends JFrame {
 		controlPanel.add(richting);
 		controlPanel.add(horizontaal);
 		controlPanel.add(verticaal);
+		verticaal.setSelected(true);
 		
 		ButtonGroup group = new ButtonGroup();
 		group.add(horizontaal);
@@ -61,7 +62,7 @@ public class ZeeslagFrame extends JFrame {
 	
 	public void addPlayerBoards(BordPanel bord, BordPanel bordOpponant) {
 		
-		player1 = new JLabel(JOptionPane.showInputDialog("player1, username?")); 
+		player1 = new JLabel((String) JOptionPane.showInputDialog(null, "Please enter new quantity", "Please enter new quantity", JOptionPane.QUESTION_MESSAGE,null,null,"player1")); 
 		board1 = bord;
 		board1.setBackground(Color.GRAY);
 		board1.setSize(new Dimension(400,400));
@@ -95,19 +96,5 @@ public class ZeeslagFrame extends JFrame {
 		 }
 		 else return Richting.VERTICAAL;
 	 }
-	 
-	 public SchipType getSchipType() {
-		 	if (schepen.getSelectedIndex() == 0) {
-		 		return SchipType.Vliegdekschip;
-		 	} else if (schepen.getSelectedIndex() == 1) {
-		 		return SchipType.Slagschip;
-		 	} else if (schepen.getSelectedIndex() == 2) {
-		 		return SchipType.Onderzeeer;
-		 	} else if (schepen.getSelectedIndex() == 3) {
-		 		return SchipType.Torpedobootjager;
-		 	} else if (schepen.getSelectedIndex() == 4) {
-		 		return SchipType.Patrouilleschip;
-		 	}
-			return null;
-	 }
+
 }

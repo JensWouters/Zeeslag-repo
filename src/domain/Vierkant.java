@@ -15,7 +15,7 @@ public class Vierkant {
 		super();
 		this.x = x;
 		this.y = y;
-		this.zijde = zijde;
+		this.zijde = zijde-1;
 		this.kleur = kleur;
 		bezet = false;
 	}
