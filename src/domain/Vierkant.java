@@ -50,4 +50,16 @@ public class Vierkant {
 	public void setBezet() {
 		this.bezet = true;
 	}
+	
+	public Positie getPositie() {
+		return new Positie(x, y);
+	}
+	
+	public int getX() { 
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
 }

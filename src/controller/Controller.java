@@ -5,15 +5,29 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import domain.Positie;
+import domain.Service;
+import domain.ServiceInterface;
 import view.ZeeslagFrame;
 
 public class Controller {
 private ZeeslagFrame view;
-private Positie positie;
+private ServiceInterface service = new Service();
 	
 	public Controller(ZeeslagFrame view){
 		this.view = view;
+		view.getBoard1().addMouseClickListener(new PlaatsSchipHandler());
 		view.getBoard1().addMouseClickListener(new MouseClickHandler());
+	}
+	
+	private class PlaatsSchipHandler extends MouseAdapter{
+		public void mouseClicked(MouseEvent event) {
+			int x = event.getX();
+			int y = event.getY();
+			
+			Positie positie = new Positie(x, y);
+			
+			service.plaatsSchip(view.getRichting(), view.getSchip(), positie);
+		}
 	}
 	
 	private class MouseClickHandler extends MouseAdapter{

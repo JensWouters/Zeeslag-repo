@@ -5,9 +5,11 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -36,6 +38,7 @@ public class ZeeslagFrame extends JFrame {
 	
 	public void addControlPanel() {
 		JPanel controlPanel = new JPanel();
+		controlPanel.setLayout(new GridLayout(5,2));
 		
 		JLabel beschikbaar = new JLabel("Beschikbare schepen");
 		beschikbaar.setLocation(10, 10);
@@ -48,22 +51,33 @@ public class ZeeslagFrame extends JFrame {
 		controlPanel.add(richting);
 		controlPanel.add(horizontaal);
 		controlPanel.add(verticaal);
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(horizontaal);
+		group.add(verticaal);
+		
 		mainPanel.add(controlPanel);
 	}
 	
 	public void addPlayerBoards() {
+		player1 = new JLabel(JOptionPane.showInputDialog("player1, username?"));
+
 		board1 = new BordPanel(25,10);
 		board1.setBackground(Color.GRAY);
 		board1.setSize(new Dimension(400,400));
 		board1.setLocation(25,50);
 		board1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		board1.add(player1);
 		mainPanel.add(board1);
-				
+		
+		player2 = new JLabel("Computer");
+		
 		board2 = new BordPanel(25,10);
 		board2.setBackground(Color.GRAY);
 		board2.setSize(new Dimension(400,400));
 		board2.setLocation(475,50);
 		board2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		board2.add(player2);
 		mainPanel.add(board2);
 	}
 	 public BordPanel getBoard1(){
@@ -83,5 +97,20 @@ public class ZeeslagFrame extends JFrame {
 			 return Richting.HORIZONTAAL;
 		 }
 		 else return Richting.VERTICAAL;
+	 }
+	 
+	 public SchipType getSchipType() {
+		 	if (schepen.getSelectedIndex() == 0) {
+		 		return SchipType.VLIEGDEKSCHIP;
+		 	} else if (schepen.getSelectedIndex() == 1) {
+		 		return SchipType.SLAGSCHIP;
+		 	} else if (schepen.getSelectedIndex() == 2) {
+		 		return SchipType.ONDERZEEER;
+		 	} else if (schepen.getSelectedIndex() == 3) {
+		 		return SchipType.TORPEDOBOOTJAGER;
+		 	} else if (schepen.getSelectedIndex() == 4) {
+		 		return SchipType.PATROUILLESCHIP;
+		 	}
+			return null;
 	 }
 }
