@@ -15,6 +15,10 @@ public class Service implements ServiceInterface {
 	public void plaatsSchip(Richting richting, SchipType schip, Positie positie) {
 		bord.plaatsSchip(richting, schip, positie);
 	}
+	
+	public void plaatsSchipOpponent(){
+		bordOpponant.plaatsSchipOpponent();
+	}
 
 	public BordPanel getBord() {
 		return bord;

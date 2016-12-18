@@ -7,4 +7,8 @@ public interface ServiceInterface {
 	public BordPanel getBord();
 	
 	public BordPanel getBordOpponant();
+	
+	public void plaatsSchipOpponent();
+		
+	
 }

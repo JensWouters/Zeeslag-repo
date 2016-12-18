@@ -5,7 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
-
+import java.util.concurrent.ThreadLocalRandom;
 import domain.Positie;
 import domain.Service;
 import domain.ServiceInterface;
@@ -20,6 +20,8 @@ private ServiceInterface service = new Service();
 		view.setVisible(true);
 		view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		service.getBord().addMouseClickListener(new PlaatsSchipHandler());
+		service.getBordOpponant().plaatsSchipOpponent();
+		
 	}
 	
 	private class PlaatsSchipHandler extends MouseAdapter{
@@ -28,6 +30,8 @@ private ServiceInterface service = new Service();
 			service.plaatsSchip(view.getRichting(), view.getSchip(), positie);
 		}
 	}
+	
+	
 	
 	private class MouseClickHandler extends MouseAdapter{
 		 public void mouseClicked(MouseEvent event){

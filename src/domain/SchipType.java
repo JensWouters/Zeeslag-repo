@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Random;
+
 public enum SchipType {
 	Vliegdekschip(5),
 	Slagschip(4),
@@ -16,6 +18,14 @@ public enum SchipType {
 	public int getSize() {
 		return this.size;
 	}
+	
+	  private static final SchipType[] VALUES = values();
+	  private static final int SIZE = VALUES.length;
+	  private static final Random RANDOM = new Random();
+
+	  public static SchipType getRandomSchip()  {
+	    return VALUES[RANDOM.nextInt(SIZE)];
+	  }
 	
 	@Override
 	public String toString() {
