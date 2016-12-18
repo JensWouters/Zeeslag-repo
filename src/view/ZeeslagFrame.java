@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,6 +26,7 @@ public class ZeeslagFrame extends JFrame {
 	private JComboBox<SchipType> schepen = new JComboBox<SchipType>(SchipType.values());
 	private JRadioButton horizontaal = new JRadioButton("Horizontaal");
 	private JRadioButton verticaal = new JRadioButton("Verticaal");
+	private JButton start = new JButton("Start spel");
 
 	public ZeeslagFrame(BordPanel bord, BordPanel bordOpponant){
 		super();
@@ -38,7 +40,7 @@ public class ZeeslagFrame extends JFrame {
 	
 	public void addControlPanel() {
 		JPanel controlPanel = new JPanel();
-		controlPanel.setLayout(new GridLayout(5,2));
+		controlPanel.setLayout(new GridLayout(6,2));
 		
 		JLabel beschikbaar = new JLabel("Beschikbare schepen");
 		beschikbaar.setLocation(10, 10);
@@ -56,6 +58,8 @@ public class ZeeslagFrame extends JFrame {
 		ButtonGroup group = new ButtonGroup();
 		group.add(horizontaal);
 		group.add(verticaal);
+		
+		controlPanel.add(start);
 		
 		mainPanel.add(controlPanel);
 	}

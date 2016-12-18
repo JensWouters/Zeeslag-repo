@@ -229,7 +229,7 @@ public class BordPanel extends JPanel{
 					 if (isAvailable(schip)) {	
 						 if (richting.equals(Richting.HORIZONTAAL)) {
 							 for (int j = 0; j < schip.getSize(); j++) {
-								 this.setKleur(nr, Color.WHITE);
+								 this.setKleur(nr, Color.LIGHT_GRAY);
 								 setOmliggendeBezet(nr);
 								 nr += 10;
 								 
@@ -237,7 +237,7 @@ public class BordPanel extends JPanel{
 						 }
 						 else if (richting.equals(Richting.VERTICAAL)) {
 							 for (int j = 0; j< schip.getSize(); j++) {
-								 this.setKleur(nr, Color.WHITE);
+								 this.setKleur(nr, Color.LIGHT_GRAY);
 								 setOmliggendeBezet(nr);
 								 nr++;
 								
