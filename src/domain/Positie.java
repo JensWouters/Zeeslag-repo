@@ -6,8 +6,8 @@ public class Positie {
 	
 	public Positie(int x, int y)
 	{
-		this.x = x;
-		this.y = y;
+		setX(x);
+		setY(y);
 	}
 
 	public int getX() {
@@ -24,5 +24,9 @@ public class Positie {
 
 	public void setY(int y) {
 		this.y = y;
+	}
+	
+	public String toString(){
+		return "(" + getX() + ", " +  getY() + ")";
 	}
 }
