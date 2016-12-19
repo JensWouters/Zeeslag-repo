@@ -200,7 +200,8 @@ public class BordPanel extends JPanel{
 	 public void plaatsSchipOpponent() {
 		while(schepenOpBord < 5) {
 			int x = (int)(Math.random() *100);
-			 		 	Vierkant vierkant = bord.getVierkanten().get(x);
+			
+			 		 	Vierkant vierkant=bord.getVierkanten().get(x);
 			 		 	Positie positie = vierkant.getPositie();
 			 			Richting richting = Richting.getRandomRichting();
 			 			SchipType schip = SchipType.getRandomSchip();
