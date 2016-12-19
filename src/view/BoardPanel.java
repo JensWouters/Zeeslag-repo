@@ -19,9 +19,6 @@ public class BoardPanel extends JPanel{
 		this.board = board;
 	}
 	
-	public void addMouseClickListener(MouseListener listener){
-		this.addMouseListener(listener);
-	}
 	
 	public Board getBoard() {
 		return this.board;

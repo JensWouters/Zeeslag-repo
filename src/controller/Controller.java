@@ -30,7 +30,7 @@ private int state = NEW_GAME;
 		view.setVisible(true);
 		view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		view.getBoardPlayer().addMouseClickListener(new PlaatsSchipHandler());
+		view.getBoardPlayer().addMouseListener(new PlaatsSchipHandler());
 		view.getStartKnop().addMouseListener(new PlaatsSchipOpponentHandler());
 		
 		
@@ -42,7 +42,6 @@ private int state = NEW_GAME;
 			Position positie = new Position(event.getX(), event.getY());
 			service.plaatsSchip(view.getRichting(), view.getSchip(), positie);
 			view.getBoardPlayer().repaint();
-			System.out.println(boardPanelPlayer.getSchepenOpBoard());
 			if (boardPanelPlayer.getSchepenOpBoard() == 5){
 				view.getStartKnop().setEnabled(true);
 			}
