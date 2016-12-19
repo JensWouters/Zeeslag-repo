@@ -66,10 +66,6 @@ public class BordPanel extends JPanel{
 	 //Extra Controle Functies
 	 
 	 public boolean isAvailable(SchipType schip) {
-		 /*System.out.println("newline");
-		 for (String s : schepen) {
-			 System.out.println(s);
-		 }*/
 		 if (schepen.contains(schip.toString())) {
 			 makeUnavailable(schip);
 			 return true;
@@ -221,21 +217,23 @@ public class BordPanel extends JPanel{
 								 
 							 }
 						 }
-						 else if (richting.equals(Richting.VERTICAAL)) {
-							 for (int j = 0; j< schip.getSize(); j++) {
-								 this.setKleur(nr, Color.WHITE);
-								 setOmliggendeBezet(nr);
-								 nr++;
-								
+							 else if (richting.equals(Richting.VERTICAAL)) {
+								 for (int j = 0; j< schip.getSize(); j++) {
+									 this.setKleur(nr, Color.WHITE);
+									 setOmliggendeBezet(nr);
+									 nr++;
+									
+								 }
 							 }
-						 }
-						 schepenOpBord++;
-						 
+							 schepenOpBord++;
+						 } 
 					 } 
-				 } 
-			 } 
-		
-	 }
 
+				 } 
+			 }
 	 }
 }
+		
+		
+
+	 
