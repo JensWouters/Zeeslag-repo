@@ -5,11 +5,11 @@ import java.awt.Color;
 public class Service implements ServiceInterface {
 	
 	private BordPanel bord;
-	private BordPanel bordOpponant;
+	private BordPanel bordOpponent;
 	
 	public Service() {
 		this.bord = new BordPanel(25,10);
-		this.bordOpponant = new BordPanel(25,10);
+		this.bordOpponent = new BordPanel(25,10);
 	}
 
 	public void plaatsSchip(Richting richting, SchipType schip, Positie positie) {
@@ -17,7 +17,7 @@ public class Service implements ServiceInterface {
 	}
 	
 	public void plaatsSchipOpponent(){
-		bordOpponant.plaatsSchipOpponent();
+		bordOpponent.plaatsSchipOpponent();
 	}
 
 	public BordPanel getBord() {
@@ -25,7 +25,7 @@ public class Service implements ServiceInterface {
 	}
 	
 	public BordPanel getBordOpponant() {
-		return this.bordOpponant;
+		return this.bordOpponent;
 	}
 	
 }

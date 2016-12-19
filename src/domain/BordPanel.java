@@ -210,8 +210,6 @@ public class BordPanel extends JPanel{
 				Richting richting = Richting.getRandomRichting();
 				SchipType schip = SchipType.getRandomSchip();
 				int nr = getNummer(positie);
-				System.out.println(richting.toString());
-				System.out.println(positie.toString());
 			 if (fitsBoardVertical(richting, schip, positie) && fitsBoardHorizontal(richting, schip, positie)) {
 				 if (!overlapsShip(richting, schip, positie)) {
 					 if (isAvailable(schip)) {	
