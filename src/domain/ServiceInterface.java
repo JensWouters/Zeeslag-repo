@@ -2,11 +2,11 @@ package domain;
 
 public interface ServiceInterface {
 
-	public void plaatsSchip(Richting richting, SchipType schip, Positie positie);
+	public void plaatsSchip(Richting richting, SchipType schip, Position positie);
 	
-	public BordPanel getBord();
+	public Board getBoard();
 	
-	public BordPanel getBordOpponant();
+	public Board getBoardOpponant();
 	
 	public void plaatsSchipOpponent();
 		
