@@ -14,7 +14,7 @@ public class Board {
 	private List<Vierkant> vierkanten = new ArrayList<Vierkant>();
 	private List<String> schepen = new ArrayList<String>(Arrays.asList("vliegdekschip", "slagschip", "slagschip", "onderzeeer", "onderzeeer", "onderzeeer",
             "torpedobootjager", "torpedobootjager", "torpedobootjager", "patrouilleschip", "patrouilleschip", "patrouilleschip", "patrouilleschip"));
-	private int schepenOpBord = 0;
+	private int schepenOpBoard = 0;
 	
 	
 	public Board(int zijde, int aantal) {
@@ -158,7 +158,7 @@ public class Board {
 	 
 	 public void plaatsSchip(Richting richting, SchipType schip, Position positie) {
 		 int nr = getNummer(positie);
-		 if (schepenOpBord < 5) {
+		 if (schepenOpBoard < 5) {
 			 if (fitsBoardVertical(richting, schip, positie) && fitsBoardHorizontal(richting, schip, positie)) {
 				 if (!overlapsShip(richting, schip, positie)) {
 					 if (isAvailable(schip)) {	
@@ -176,50 +176,16 @@ public class Board {
 								 nr++;
 							 }
 						 }
-						 schepenOpBord++;
+						 schepenOpBoard++;
 					 } else { JOptionPane.showMessageDialog(null, "Dit schip is niet meer beschikbaar."); }
 				 } else { JOptionPane.showMessageDialog(null, "Je schepen overlappen!"); }
 			 } else { JOptionPane.showMessageDialog(null, "Dit pas niet op het bord!"); }
 		 } else { JOptionPane.showMessageDialog(null, "Je mag maar 5 schepen plaatsen!"); } 
 	 }
 	 
-	 public void plaatsSchipOpponent() {
-		
-		 
-		 
-//		while(schepenOpBord < 5) {
-//			int x = (int)(Math.random() *100);
-//			 		 	Vierkant vierkant = this.getVierkanten().get(x);
-//			 		 	Position positie = vierkant.getPositie();
-//			 			Richting richting = Richting.getRandomRichting();
-//			 			SchipType schip = SchipType.getRandomSchip();
-//			 			int nr = getNummer(positie);
-//			 				 if (fitsBoardVertical(richting, schip, positie) && fitsBoardHorizontal(richting, schip, positie)) {
-//			 					 if (!overlapsShip(richting, schip, positie)) {
-//			 						 if (isAvailable(schip)) {	
-//			 							 if (richting.equals(Richting.HORIZONTAAL)) {
-//			 								 for (int j = 0; j < schip.getSize(); j++) {
-//			 									 this.setKleur(nr, Color.WHITE);
-//			 									 setOmliggendeBezet(nr);
-//			 									 nr += 10;
-//			 									 
-//			 								 }
-//						 }
-//			 							 else if (richting.equals(Richting.VERTICAAL)) {
-//			 								 								 for (int j = 0; j< schip.getSize(); j++) {
-//			 								 									 this.setKleur(nr, Color.WHITE);
-//			 								 									 setOmliggendeBezet(nr);
-//			 								 									 nr++;
-//			 								 									
-//			 								 								 }
-//							 }
-//							 schepenOpBord++;
-//						 } 
-//					 } 
-//				 }
-//	 }
-
-	 }
+	public int getSchepenOpBoard() {
+		return schepenOpBoard;
+	}
 
 
 }

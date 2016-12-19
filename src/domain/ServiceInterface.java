@@ -8,7 +8,4 @@ public interface ServiceInterface {
 	
 	public Board getBoardOpponant();
 	
-	public void plaatsSchipOpponent();
-		
-	
 }

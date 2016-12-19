@@ -27,6 +27,10 @@ public class BoardPanel extends JPanel{
 		return this.board;
 	}
 	
+	public int getSchepenOpBoard() {
+		return board.getSchepenOpBoard();
+	}
+	
 	public List<Vierkant> getVierkanten(){
 		return board.getVierkanten();
 	}

@@ -19,33 +19,48 @@ private ZeeslagFrame view;
 private BoardPanel boardPanelPlayer, boardPanelOpponant;
 private ServiceInterface service = new Service();
 
+private final static int NEW_GAME = 0;
+private final static int START_GAME = 1; 
+private int state = NEW_GAME;
 
 	public Controller(){
-		service.getBoardOpponant().plaatsSchipOpponent();
 		boardPanelPlayer = new BoardPanel(service.getBoard());
 		boardPanelOpponant = new BoardPanel(service.getBoardOpponant());
 		view = new ZeeslagFrame(boardPanelPlayer, boardPanelOpponant);
 		view.setVisible(true);
 		view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		view.getBoardPlayer().addMouseClickListener(new PlaatsSchipHandler());
 		view.getStartKnop().addMouseListener(new PlaatsSchipOpponentHandler());
+		
+		
 	}
 	
 	private class PlaatsSchipHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event) {
+			if (state == 0) {
 			Position positie = new Position(event.getX(), event.getY());
 			service.plaatsSchip(view.getRichting(), view.getSchip(), positie);
 			view.getBoardPlayer().repaint();
+			System.out.println(boardPanelPlayer.getSchepenOpBoard());
+			if (boardPanelPlayer.getSchepenOpBoard() == 5){
+				view.getStartKnop().setEnabled(true);
+			}
+			}
 			
 		}
 	}
 	
 	private class PlaatsSchipOpponentHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event){
+			if (state == 0) {
 			SpelStrategy strategy = new RandomStrategy();
 			Board board = service.getBoardOpponant();
 			strategy.plaatsSchipOpponent(board);
 			view.getBoardOpponant().repaint();
+			view.getStartKnop().setEnabled(false);
+			state = START_GAME;
+			}
 		}
 	}
 	
