@@ -1,10 +1,10 @@
 package domain;
 
-public class Positie {
+public class Position {
 	
 	int x, y;
 	
-	public Positie(int x, int y)
+	public Position(int x, int y)
 	{
 		setX(x);
 		setY(y);
