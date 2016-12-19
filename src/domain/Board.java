@@ -22,5 +22,7 @@ public class Board {
 	public List<Vierkant> getVierkanten() {
 		return vierkanten;
 	}
+	
+	
 
 }
