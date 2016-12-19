@@ -58,6 +58,7 @@ public class ZeeslagFrame extends JFrame {
 		group.add(horizontaal);
 		group.add(verticaal);
 		
+		
 		controlPanel.add(start);
 		
 		mainPanel.add(controlPanel);
@@ -87,6 +88,10 @@ public class ZeeslagFrame extends JFrame {
 	 
 	 public BoardPanel getBoardOpponant(){
 		 return boardOpponant;
+	 }
+	 
+	 public JButton getStartKnop(){
+		 return start;
 	 }
 	 
 	 public SchipType getSchip() {

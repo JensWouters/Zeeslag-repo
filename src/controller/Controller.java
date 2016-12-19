@@ -1,22 +1,25 @@
 package controller;
 
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 
+import strategy.RandomStrategy;
+import strategy.SpelStrategy;
+import view.BoardPanel;
+import view.ZeeslagFrame;
+import domain.Board;
 import domain.Position;
 import domain.Service;
 import domain.ServiceInterface;
-import view.BoardPanel;
-import view.ZeeslagFrame;
 
 public class Controller {
 private ZeeslagFrame view;
 private BoardPanel boardPanelPlayer, boardPanelOpponant;
 private ServiceInterface service = new Service();
-	
+
+
 	public Controller(){
 		service.getBoardOpponant().plaatsSchipOpponent();
 		boardPanelPlayer = new BoardPanel(service.getBoard());
@@ -25,6 +28,7 @@ private ServiceInterface service = new Service();
 		view.setVisible(true);
 		view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		view.getBoardPlayer().addMouseClickListener(new PlaatsSchipHandler());
+		view.getStartKnop().addMouseListener(new PlaatsSchipOpponentHandler());
 	}
 	
 	private class PlaatsSchipHandler extends MouseAdapter{
@@ -32,6 +36,15 @@ private ServiceInterface service = new Service();
 			Position positie = new Position(event.getX(), event.getY());
 			service.plaatsSchip(view.getRichting(), view.getSchip(), positie);
 			view.getBoardPlayer().repaint();
+			
+		}
+	}
+	
+	private class PlaatsSchipOpponentHandler extends MouseAdapter{
+		public void mouseClicked(MouseEvent event){
+			SpelStrategy strategy = new RandomStrategy();
+			Board board = service.getBoardOpponant();
+			strategy.plaatsSchipOpponent(board);
 			view.getBoardOpponant().repaint();
 		}
 	}

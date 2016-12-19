@@ -7,12 +7,15 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+
+
 public class Board {
 	
 	private List<Vierkant> vierkanten = new ArrayList<Vierkant>();
 	private List<String> schepen = new ArrayList<String>(Arrays.asList("vliegdekschip", "slagschip", "slagschip", "onderzeeer", "onderzeeer", "onderzeeer",
             "torpedobootjager", "torpedobootjager", "torpedobootjager", "patrouilleschip", "patrouilleschip", "patrouilleschip", "patrouilleschip"));
 	private int schepenOpBord = 0;
+	
 	
 	public Board(int zijde, int aantal) {
 		int y = 0;
@@ -181,37 +184,40 @@ public class Board {
 	 }
 	 
 	 public void plaatsSchipOpponent() {
-		while(schepenOpBord < 5) {
-			int x = (int)(Math.random() *100);
-			 		 	Vierkant vierkant = this.getVierkanten().get(x);
-			 		 	Position positie = vierkant.getPositie();
-			 			Richting richting = Richting.getRandomRichting();
-			 			SchipType schip = SchipType.getRandomSchip();
-			 			int nr = getNummer(positie);
-			 				 if (fitsBoardVertical(richting, schip, positie) && fitsBoardHorizontal(richting, schip, positie)) {
-			 					 if (!overlapsShip(richting, schip, positie)) {
-			 						 if (isAvailable(schip)) {	
-			 							 if (richting.equals(Richting.HORIZONTAAL)) {
-			 								 for (int j = 0; j < schip.getSize(); j++) {
-			 									 this.setKleur(nr, Color.WHITE);
-			 									 setOmliggendeBezet(nr);
-			 									 nr += 10;
-			 									 
-			 								 }
-						 }
-			 							 else if (richting.equals(Richting.VERTICAAL)) {
-			 								 								 for (int j = 0; j< schip.getSize(); j++) {
-			 								 									 this.setKleur(nr, Color.WHITE);
-			 								 									 setOmliggendeBezet(nr);
-			 								 									 nr++;
-			 								 									
-			 								 								 }
-							 }
-							 schepenOpBord++;
-						 } 
-					 } 
-				 }
-	 }
+		
+		 
+		 
+//		while(schepenOpBord < 5) {
+//			int x = (int)(Math.random() *100);
+//			 		 	Vierkant vierkant = this.getVierkanten().get(x);
+//			 		 	Position positie = vierkant.getPositie();
+//			 			Richting richting = Richting.getRandomRichting();
+//			 			SchipType schip = SchipType.getRandomSchip();
+//			 			int nr = getNummer(positie);
+//			 				 if (fitsBoardVertical(richting, schip, positie) && fitsBoardHorizontal(richting, schip, positie)) {
+//			 					 if (!overlapsShip(richting, schip, positie)) {
+//			 						 if (isAvailable(schip)) {	
+//			 							 if (richting.equals(Richting.HORIZONTAAL)) {
+//			 								 for (int j = 0; j < schip.getSize(); j++) {
+//			 									 this.setKleur(nr, Color.WHITE);
+//			 									 setOmliggendeBezet(nr);
+//			 									 nr += 10;
+//			 									 
+//			 								 }
+//						 }
+//			 							 else if (richting.equals(Richting.VERTICAAL)) {
+//			 								 								 for (int j = 0; j< schip.getSize(); j++) {
+//			 								 									 this.setKleur(nr, Color.WHITE);
+//			 								 									 setOmliggendeBezet(nr);
+//			 								 									 nr++;
+//			 								 									
+//			 								 								 }
+//							 }
+//							 schepenOpBord++;
+//						 } 
+//					 } 
+//				 }
+//	 }
 
 	 }
 

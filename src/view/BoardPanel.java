@@ -3,12 +3,8 @@ package view;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import domain.Board;
