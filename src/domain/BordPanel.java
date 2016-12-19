@@ -201,19 +201,7 @@ public class BordPanel extends JPanel{
 		 } else { JOptionPane.showMessageDialog(null, "Je mag maar 5 schepen plaatsen!"); } 
 	 }
 	 
-	 
-	 public int getNummerComputer(Positie positie) {
-		 List<Vierkant> vierkanten = this.getVierkanten();
-		 int nr = 0;
-		 for (int i = 0; i < vierkanten.size(); i++) {
-			 if (vierkanten.get(i).isAangeklikt(positie.getX(), positie.getY())) {
-				nr = i;
-			 }
-		 } 
-		 return nr;
-	 }
-	 
-	 
+
 	 public void plaatsSchipOpponent() {
 		while(schepenOpBord < 5) {
 			 	int x = (int)(Math.random() *100);
@@ -247,7 +235,7 @@ public class BordPanel extends JPanel{
 						 
 					 } 
 				 } 
-			 } else{ System.out.println("kak");} 
+			 } 
 		
 	 }
 
