@@ -21,7 +21,6 @@ private ServiceInterface service = new Service();
 
 
 	public Controller(){
-		service.getBoardOpponant().plaatsSchipOpponent();
 		boardPanelPlayer = new BoardPanel(service.getBoard());
 		boardPanelOpponant = new BoardPanel(service.getBoardOpponant());
 		view = new ZeeslagFrame(boardPanelPlayer, boardPanelOpponant);

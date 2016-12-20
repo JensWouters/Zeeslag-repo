@@ -183,43 +183,7 @@ public class Board {
 		 } else { JOptionPane.showMessageDialog(null, "Je mag maar 5 schepen plaatsen!"); } 
 	 }
 	 
-	 public void plaatsSchipOpponent() {
-		
-		 
-		 
-//		while(schepenOpBord < 5) {
-//			int x = (int)(Math.random() *100);
-//			 		 	Vierkant vierkant = this.getVierkanten().get(x);
-//			 		 	Position positie = vierkant.getPositie();
-//			 			Richting richting = Richting.getRandomRichting();
-//			 			SchipType schip = SchipType.getRandomSchip();
-//			 			int nr = getNummer(positie);
-//			 				 if (fitsBoardVertical(richting, schip, positie) && fitsBoardHorizontal(richting, schip, positie)) {
-//			 					 if (!overlapsShip(richting, schip, positie)) {
-//			 						 if (isAvailable(schip)) {	
-//			 							 if (richting.equals(Richting.HORIZONTAAL)) {
-//			 								 for (int j = 0; j < schip.getSize(); j++) {
-//			 									 this.setKleur(nr, Color.WHITE);
-//			 									 setOmliggendeBezet(nr);
-//			 									 nr += 10;
-//			 									 
-//			 								 }
-//						 }
-//			 							 else if (richting.equals(Richting.VERTICAAL)) {
-//			 								 								 for (int j = 0; j< schip.getSize(); j++) {
-//			 								 									 this.setKleur(nr, Color.WHITE);
-//			 								 									 setOmliggendeBezet(nr);
-//			 								 									 nr++;
-//			 								 									
-//			 								 								 }
-//							 }
-//							 schepenOpBord++;
-//						 } 
-//					 } 
-//				 }
-//	 }
-
-	 }
+	
 
 
 }
