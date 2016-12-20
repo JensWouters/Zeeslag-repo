@@ -9,6 +9,7 @@ public class Vierkant {
 	private int x,y,zijde;
 	private Color kleur;
 	public boolean bezet;
+	public boolean bezetSchip;
 	
 	
 	public Vierkant(int x, int y, int zijde, Color kleur) {
@@ -24,6 +25,10 @@ public class Vierkant {
 	}
 	public void setKleur(Color kleur) {
 		this.kleur = kleur;
+	}
+	
+	public boolean getBezetSchip(){
+		return bezetSchip;
 	}
 	public boolean getBezet(){
 		return bezet;
@@ -47,8 +52,16 @@ public class Vierkant {
 		return aangeklikt;		
 	}
 	
+	public void setBezetSchip(){
+		this.bezetSchip = true;
+	}
+	
 	public void setBezet() {
 		this.bezet = true;
+	}
+	
+	public void setVrij(){
+		this.bezet = false;
 	}
 	
 	public Position getPositie() {

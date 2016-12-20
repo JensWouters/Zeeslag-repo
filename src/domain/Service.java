@@ -26,7 +26,7 @@ public class Service implements ServiceInterface {
 	}
 	
 	public void attackSchip(Position position){
-		board.attackSchip(position);
+		boardOpponent.attackSchip(position);
 	}
 	
 }

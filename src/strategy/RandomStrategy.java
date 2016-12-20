@@ -28,6 +28,7 @@ public class RandomStrategy implements SpelStrategy {
 			 							 if (richting.equals(Richting.HORIZONTAAL)) {
 			 								 for (int j = 0; j < schip.getSize(); j++) {
 			 									board.setKleur(nr, Color.WHITE);
+			 									board.getVierkanten().get(nr).setBezetSchip();
 			 									board.setOmliggendeBezet(nr);
 			 									 nr += 10;
 			 									 
@@ -36,6 +37,7 @@ public class RandomStrategy implements SpelStrategy {
 			 							 else if (richting.equals(Richting.VERTICAAL)) {
 			 								 for (int j = 0; j< schip.getSize(); j++) {
 			 									board.setKleur(nr, Color.WHITE);
+			 									board.getVierkanten().get(nr).setBezetSchip();
 			 									board.setOmliggendeBezet(nr);
 			 									 nr++;
 			 									

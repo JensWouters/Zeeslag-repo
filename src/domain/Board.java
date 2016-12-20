@@ -50,6 +50,9 @@ public class Board {
 	public void setBezet(int nr) {
 		this.getVierkanten().get(nr).setBezet();
 	}
+	public boolean getBezet(int nr){
+		 return this.getVierkanten().get(nr).getBezet();
+	}
 	
 	 public boolean isAvailable(SchipType schip) {
 		 if (schepen.contains(schip.toString())) {
@@ -127,7 +130,6 @@ public class Board {
 	 
 	 public void setOmliggendeBezet(int nr) {
 		 List<Vierkant> vierkanten = this.getVierkanten();
-		 vierkanten.get(nr).setBezet();
 	 	 try {
 		 vierkanten.get(nr-10).setBezet();
 	 	 } catch (IndexOutOfBoundsException e) {}
@@ -153,6 +155,8 @@ public class Board {
 		 vierkanten.get(nr+11).setBezet();
 		 } catch (IndexOutOfBoundsException e) {}
 	 }
+	 
+	 
 	 
 	 // Einde controle functies
 	 
@@ -184,8 +188,15 @@ public class Board {
 	 }
 	 
 	 public void attackSchip(Position position){
+
 		 int nr = getNummer(position);
-		 this.setKleur(nr, Color.RED);
+		 if(this.getVierkanten().get(nr).getBezetSchip() == true){
+			 this.setKleur(nr, Color.GREEN);
+		 }
+		 else{
+			 this.setKleur(nr, Color.BLACK);
+		 }
+			
 		 
 	 }
 	 
