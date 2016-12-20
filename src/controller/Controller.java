@@ -31,7 +31,9 @@ private int state = NEW_GAME;
 		view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		view.getBoardPlayer().addMouseListener(new PlaatsSchipHandler());
+		
 		view.getStartKnop().addMouseListener(new PlaatsSchipOpponentHandler());
+		view.getBoardOpponant().addMouseListener(new AttackSchepenHandler());
 		
 		
 	}
@@ -62,6 +64,21 @@ private int state = NEW_GAME;
 			}
 		}
 	}
+	
+	private class AttackSchepenHandler extends MouseAdapter{
+		public void mouseClicked(MouseEvent event){
+			if(state == START_GAME){
+			int x = event.getX();
+			int y = event.getY();
+			Position position = new Position(x,y);
+			service.getBoardOpponant().attackSchip(position);
+			view.getBoardOpponant().repaint();
+			}
+		
+		}
+	}
+		
+	
 	
 	
 	

@@ -8,5 +8,7 @@ public interface ServiceInterface {
 	
 	public Board getBoardOpponant();
 	
+	public void attackSchip(Position position);
+	
 
 }

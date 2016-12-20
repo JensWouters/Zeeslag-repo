@@ -183,6 +183,12 @@ public class Board {
 		 } else { JOptionPane.showMessageDialog(null, "Je mag maar 5 schepen plaatsen!"); } 
 	 }
 	 
+	 public void attackSchip(Position position){
+		 int nr = getNummer(position);
+		 this.setKleur(nr, Color.RED);
+		 
+	 }
+	 
 
 	public int getSchepenOpBoard() {
 		return schepenOpBoard;
