@@ -8,7 +8,5 @@ public interface ServiceInterface {
 	
 	public Board getBoardOpponant();
 	
-	
-		
-	
+
 }

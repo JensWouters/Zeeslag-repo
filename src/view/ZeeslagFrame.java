@@ -58,14 +58,13 @@ public class ZeeslagFrame extends JFrame {
 		group.add(horizontaal);
 		group.add(verticaal);
 		
-		
+		start.setEnabled(false);
 		controlPanel.add(start);
 		
 		mainPanel.add(controlPanel);
 	}
 	
 	public void addPlayerBoards(BoardPanel bord, BoardPanel bordOpponant) {
-		
 		player1 = new JLabel((String) JOptionPane.showInputDialog(null, "Please enter username", "Please enter username", JOptionPane.QUESTION_MESSAGE,null,null,"player1")); 
 		boardPlayer = bord;
 		boardPlayer.setBackground(Color.GRAY);

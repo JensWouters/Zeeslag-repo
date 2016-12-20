@@ -15,8 +15,7 @@ public class Service implements ServiceInterface {
 	public void plaatsSchip(Richting richting, SchipType schip, Position positie) {
 		board.plaatsSchip(richting, schip, positie);
 	}
-	
-	
+
 
 	public Board getBoard() {
 		return board;
