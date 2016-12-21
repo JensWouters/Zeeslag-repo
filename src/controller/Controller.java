@@ -18,7 +18,6 @@ public class Controller {
 private ZeeslagFrame view;
 private BoardPanel boardPanelPlayer, boardPanelOpponant;
 private ServiceInterface service = new Service();
-
 private final static int NEW_GAME = 0;
 private final static int START_GAME = 1; 
 private int state = NEW_GAME;
@@ -29,11 +28,10 @@ private int state = NEW_GAME;
 		view = new ZeeslagFrame(boardPanelPlayer, boardPanelOpponant);
 		view.setVisible(true);
 		view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		view.getBoardPlayer().addMouseListener(new PlaatsSchipHandler());
-		
 		view.getStartKnop().addMouseListener(new PlaatsSchipOpponentHandler());
 		view.getBoardOpponant().addMouseListener(new AttackSchepenHandler());
+		view.getBoardOpponant().addMouseListener(new AttackSchepenComputerHandler());
 		
 		
 	}
@@ -46,6 +44,7 @@ private int state = NEW_GAME;
 			view.getBoardPlayer().repaint();
 			if (boardPanelPlayer.getSchepenOpBoard() == 5){
 				view.getStartKnop().setEnabled(true);
+				
 			}
 			}
 			
@@ -67,14 +66,26 @@ private int state = NEW_GAME;
 	
 	private class AttackSchepenHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event){
-			if(state == START_GAME){
+			if(state == 1){
 			int x = event.getX();
 			int y = event.getY();
 			Position position = new Position(x,y);
 			service.getBoardOpponant().attackSchip(position);
 			view.getBoardOpponant().repaint();
+			state = START_GAME;
+		}
+	}
+	}
+	
+	private class AttackSchepenComputerHandler extends MouseAdapter{
+		public void mouseClicked(MouseEvent event){
+			if(state == 1){
+				if(service.getBoardOpponant().getBeurt()){
+			service.getBoard().attackSchipComputer();
+			view.getBoardPlayer().repaint();
+				}
+			
 			}
-		
 		}
 	}
 		
@@ -103,3 +114,4 @@ private int state = NEW_GAME;
 //		 }
 //	 }
 }
+

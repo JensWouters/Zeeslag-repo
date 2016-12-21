@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import State.SpelState;
+
 
 
 public class Board {
@@ -15,6 +17,9 @@ public class Board {
 	private List<String> schepen = new ArrayList<String>(Arrays.asList("vliegdekschip", "slagschip", "slagschip", "onderzeeer", "onderzeeer", "onderzeeer",
             "torpedobootjager", "torpedobootjager", "torpedobootjager", "patrouilleschip", "patrouilleschip", "patrouilleschip", "patrouilleschip"));
 	private int schepenOpBoard = 0;
+	private SpelState state;
+	private boolean beurt;
+	
 	
 	
 	public Board(int zijde, int aantal) {
@@ -31,6 +36,13 @@ public class Board {
 	public List<Vierkant> getVierkanten() {
 		return vierkanten;
 	}
+	public boolean getBeurt(){
+		return beurt;
+	}
+	
+	public void setBeurt(boolean beurt){
+		this.beurt = beurt;
+	}
 
 	public void setKleur(int nr, Color kleur){
 		this.getVierkanten().get(nr).setKleur(kleur);
@@ -46,6 +58,14 @@ public class Board {
 		 } 
 		 return nr;
 	 }
+	
+	public SpelState getState(){
+		return state;
+	}
+	
+	public void setState(SpelState state){
+		this.state = state;
+	}
 	
 	public void setBezet(int nr) {
 		this.getVierkanten().get(nr).setBezet();
@@ -170,6 +190,7 @@ public class Board {
 							 for (int j = 0; j < schip.getSize(); j++) {
 								 this.setKleur(nr, Color.WHITE);
 								 setOmliggendeBezet(nr);
+								 this.getVierkanten().get(nr).setBezetSchip();
 								 nr += 10;
 							 }
 						 }
@@ -177,6 +198,7 @@ public class Board {
 							 for (int j = 0; j< schip.getSize(); j++) {
 								 this.setKleur(nr, Color.WHITE);
 								 setOmliggendeBezet(nr);
+								 this.getVierkanten().get(nr).setBezetSchip();
 								 nr++;
 							 }
 						 }
@@ -188,15 +210,50 @@ public class Board {
 	 }
 	 
 	 public void attackSchip(Position position){
-
+		 
 		 int nr = getNummer(position);
-		 if(this.getVierkanten().get(nr).getBezetSchip() == true){
-			 this.setKleur(nr, Color.GREEN);
+		 Vierkant vierkant = this.getVierkanten().get(nr);
+		 if(vierkant.getKleur() == Color.LIGHT_GRAY || vierkant.getKleur() == Color.WHITE ){
+			 if(this.getVierkanten().get(nr).getBezetSchip() == true){
+				 this.setKleur(nr, Color.GREEN);
+				 this.setBeurt(true);
+			 }else{
+				 this.setKleur(nr, Color.BLUE);
+				 this.setBeurt(true);
+			 }
+		 }else if(vierkant.getKleur() == Color.GREEN || vierkant.getKleur() == Color.BLUE){
+			 this.setBeurt(false);
 		 }
-		 else{
-			 this.setKleur(nr, Color.BLACK);
+			 
+		
+	 }
+	 
+	 public void attackSchipComputer(){
+		
+	 	int a = (int)(Math.random() *100);
+		Vierkant vierkant = this.getVierkanten().get(a);
+		Position position = vierkant.getPositie();
+		int nr = getNummer(position);
+			 if(vierkant.getKleur().equals(Color.LIGHT_GRAY) || vierkant.getKleur().equals(Color.WHITE)){
+				 	if(this.getVierkanten().get(nr).getBezetSchip() == true){
+				 		
+				 			this.setKleur(nr, Color.GREEN);
+				 			
+			 }
+				 	else{
+				 this.setKleur(nr, Color.BLUE);
+			 }
+		 
+	 }
+			 else{
+				 this.attackSchipComputer();
 		 }
 			
+			 
+		 
+	 }
+		
+	 public void schipDown(){
 		 
 	 }
 	 

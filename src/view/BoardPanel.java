@@ -2,7 +2,6 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.JPanel;

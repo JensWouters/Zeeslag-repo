@@ -14,36 +14,39 @@ public class RandomStrategy implements SpelStrategy {
 	private int schepenOpBoard = 0;
 	
 	
+	
+	
+	
 	public void plaatsSchipOpponent(Board board) {
 		while(schepenOpBoard < 5) {
 			int x = (int)(Math.random() *100);
-			 		 	Vierkant vierkant = board.getVierkanten().get(x);
-			 		 	Position positie = vierkant.getPositie();
-			 			Richting richting = Richting.getRandomRichting();
-			 			SchipType schip = SchipType.getRandomSchip();
-			 			int nr = board.getNummer(positie);
-			 				 if (board.fitsBoardVertical(richting, schip, positie) && board.fitsBoardHorizontal(richting, schip, positie)) {
-			 					 if (!board.overlapsShip(richting, schip, positie)) {
-			 						 if (board.isAvailable(schip)) {	
-			 							 if (richting.equals(Richting.HORIZONTAAL)) {
-			 								 for (int j = 0; j < schip.getSize(); j++) {
-			 									board.setKleur(nr, Color.WHITE);
-			 									board.getVierkanten().get(nr).setBezetSchip();
-			 									board.setOmliggendeBezet(nr);
-			 									 nr += 10;
-			 									 
-			 								 }
-						 }
-			 							 else if (richting.equals(Richting.VERTICAAL)) {
-			 								 for (int j = 0; j< schip.getSize(); j++) {
-			 									board.setKleur(nr, Color.WHITE);
-			 									board.getVierkanten().get(nr).setBezetSchip();
-			 									board.setOmliggendeBezet(nr);
-			 									 nr++;
-			 									
-			 								 }
-							 }
-							 schepenOpBoard++;
+	 		 	Vierkant vierkant = board.getVierkanten().get(x);
+	 		 	Position positie = vierkant.getPositie();
+	 			Richting richting = Richting.getRandomRichting();
+	 			SchipType schip = SchipType.getRandomSchip();
+	 			int nr = board.getNummer(positie);
+	 				 if (board.fitsBoardVertical(richting, schip, positie) && board.fitsBoardHorizontal(richting, schip, positie)) {
+	 					 if (!board.overlapsShip(richting, schip, positie)) {
+	 						 if (board.isAvailable(schip)) {	
+	 							 if (richting.equals(Richting.HORIZONTAAL)) {
+	 								 for (int j = 0; j < schip.getSize(); j++) {
+	 									board.setKleur(nr, Color.WHITE);
+	 									board.getVierkanten().get(nr).setBezetSchip();
+	 									board.setOmliggendeBezet(nr);
+	 									 nr += 10;
+	 									 
+	 								 }
+				 }
+	 							 else if (richting.equals(Richting.VERTICAAL)) {
+	 								 for (int j = 0; j< schip.getSize(); j++) {
+	 									board.setKleur(nr, Color.WHITE);
+	 									board.getVierkanten().get(nr).setBezetSchip();
+	 									board.setOmliggendeBezet(nr);
+	 									nr++;
+	 									
+	 								 }
+					 }
+					 schepenOpBoard++;
 						 } 
 					 } 
 				 }
