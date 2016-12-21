@@ -24,21 +24,24 @@ public class RandomStrategy implements SpelStrategy {
 			 			int nr = board.getNummer(positie);
 			 				 if (board.fitsBoardVertical(richting, schip, positie) && board.fitsBoardHorizontal(richting, schip, positie)) {
 			 					 if (!board.overlapsShip(richting, schip, positie)) {
-			 						 if (board.isAvailable(schip)) {	
+			 						 if (board.isAvailable(schip)) {
+			 							 board.getSizeVanSchepenOpponent().add(schip.getSize());
 			 							 if (richting.equals(Richting.HORIZONTAAL)) {
 			 								 for (int j = 0; j < schip.getSize(); j++) {
-			 									board.setKleur(nr, Color.WHITE);
+			 									board.setKleur(nr, Color.LIGHT_GRAY);
 			 									board.getVierkanten().get(nr).setBezetSchip();
 			 									board.setOmliggendeBezet(nr);
+			 									board.getCoordinatenVanSchepenOpponent().add(nr);
 			 									 nr += 10;
 			 									 
 			 								 }
 						 }
 			 							 else if (richting.equals(Richting.VERTICAAL)) {
 			 								 for (int j = 0; j< schip.getSize(); j++) {
-			 									board.setKleur(nr, Color.WHITE);
+			 									board.setKleur(nr, Color.LIGHT_GRAY);
 			 									board.getVierkanten().get(nr).setBezetSchip();
 			 									board.setOmliggendeBezet(nr);
+			 									board.getCoordinatenVanSchepenOpponent().add(nr);
 			 									 nr++;
 			 									
 			 								 }
