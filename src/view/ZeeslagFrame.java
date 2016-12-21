@@ -41,9 +41,9 @@ public class ZeeslagFrame extends JFrame {
 	
 	public void addControlPanel() {
 		JPanel controlPanel = new JPanel();
-		//controlPanel.setLayout(new GridLayout(8,1));
+		controlPanel.setLayout(new GridLayout(9,1));
 		
-		controlPanel.setLayout(new GridLayout(7,2));
+		//controlPanel.setLayout(new GridLayout(7,2));
 		
 		JLabel beschikbaar = new JLabel("Beschikbare schepen");
 		beschikbaar.setLocation(10, 10);
@@ -69,10 +69,10 @@ public class ZeeslagFrame extends JFrame {
 		score.setEnabled(false);
 		controlPanel.add(score);
 		
-		/*player1 = new JLabel((String) JOptionPane.showInputDialog(null, "Please enter username", "Please enter username", JOptionPane.QUESTION_MESSAGE,null,null,"player1"));
+		player1 = new JLabel((String) JOptionPane.showInputDialog(null, "Please enter username", "Please enter username", JOptionPane.QUESTION_MESSAGE,null,null,"player1"));
 		player2 = new JLabel("Computer");
 		controlPanel.add(player1);
-		controlPanel.add(player2);*/
+		controlPanel.add(player2);
 		
 		mainPanel.add(controlPanel);
 	}
