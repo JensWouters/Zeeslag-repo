@@ -20,6 +20,7 @@ public class Board {
 	private SpelState state;
 	private boolean beurt;
 	private int geraakteBoten = 0;
+	private int deadShips;
 	private final int MAX_SCORE = 19;
 	
 	private List<Integer> coordinatenVanSchepenOpponent = new ArrayList<Integer>();
@@ -253,7 +254,6 @@ public class Board {
 		 if(vierkant.getKleur() == Color.LIGHT_GRAY || vierkant.getKleur() == Color.WHITE ){
 			 if(this.getVierkanten().get(nr).getBezetSchip() == true){
 				 this.setKleur(nr, Color.GREEN);
-				 score--;
 				 List<Integer> coordinaten = getAangevallenSchipOpponent(nr);
 				 vierkanten.get(nr).setHit();
 				 if (isKilled(coordinaten)) {
