@@ -19,6 +19,7 @@ public class Board {
 	private int schepenOpBoard = 0;
 	private SpelState state;
 	private boolean beurt;
+	 int score;
 	
 	
 	private List<Integer> coordinatenVanSchepenOpponent = new ArrayList<Integer>();
@@ -86,6 +87,11 @@ public class Board {
 	public void setState(SpelState state){
 		this.state = state;
 	}
+	
+	public int getScore(){
+		return score - 19;
+	}
+	
 	
 	public void setBezet(int nr) {
 		this.getVierkanten().get(nr).setBezet();
@@ -239,12 +245,15 @@ public class Board {
 					 killSchipOpponent(coordinaten);
 				 }
 				 this.setBeurt(true);
+				 this.score +=0;
 			 
 			 }else{
 				 this.setKleur(nr, Color.BLUE);
 				 this.setBeurt(true);
+				 this.score++;
 			 }
-		  		}else if(vierkant.getKleur() == Color.GREEN || vierkant.getKleur() == Color.BLUE){
+		  		}else if(vierkant.getKleur() == Color.GREEN || vierkant.getKleur() == Color.BLUE ||
+		  				vierkant.getKleur() == Color.RED){
 			 this.setBeurt(false);
 		
 			 
@@ -252,31 +261,7 @@ public class Board {
 	 }
 	 }
 	 
-	 public void attackSchipComputer(){
-		
-	 	int a = (int)(Math.random() *100);
-		Vierkant vierkant = this.getVierkanten().get(a);
-		Position position = vierkant.getPositie();
-		int nr = getNummer(position);
-			 if(vierkant.getKleur().equals(Color.LIGHT_GRAY) || vierkant.getKleur().equals(Color.WHITE)){
-				 	if(this.getVierkanten().get(nr).getBezetSchip() == true){
-				 		
-				 			this.setKleur(nr, Color.GREEN);
-				 			
-			 }
-				 	else{
-				 this.setKleur(nr, Color.BLUE);
-			 }
-		 
-	 }
-			 else{
-				 this.attackSchipComputer();
-		 }
-
-			
-			 
-		 
-	 }
+	 
 		
 	 
 	 public void killSchipOpponent(List<Integer> coordinaten) {

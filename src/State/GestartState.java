@@ -12,4 +12,9 @@ public class GestartState implements SpelState{
 		
 	}
 
+	public void plaatsSchepen() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

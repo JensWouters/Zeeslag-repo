@@ -7,8 +7,12 @@ import javax.swing.JFrame;
 
 import strategy.RandomStrategy;
 import strategy.SpelStrategy;
+import strategy.aanvalstrategy.AanvalStrategy;
+import strategy.aanvalstrategy.RandomAanvalStrategy;
 import view.BoardPanel;
 import view.ZeeslagFrame;
+import State.NieuwState;
+import State.SpelState;
 import domain.Board;
 import domain.Position;
 import domain.Service;
@@ -32,11 +36,19 @@ private int state = NEW_GAME;
 		view.getStartKnop().addMouseListener(new PlaatsSchipOpponentHandler());
 		view.getBoardOpponant().addMouseListener(new AttackSchepenHandler());
 		view.getBoardOpponant().addMouseListener(new AttackSchepenComputerHandler());
+		view.getScoreKnop().addMouseListener(new ScoreHandler());
 
 		
 		
 	}
 	
+	private class ScoreHandler extends MouseAdapter{
+		public void mouseClicked(MouseEvent event){
+			int score = service.getBoardOpponant().getScore();
+			System.out.println(score);
+		}
+	}
+
 	private class PlaatsSchipHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event) {
 			if (state == 0) {
@@ -81,14 +93,19 @@ private int state = NEW_GAME;
 	private class AttackSchepenComputerHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event){
 			if(state == 1){
+				view.getScoreKnop().setEnabled(true);
 				if(service.getBoardOpponant().getBeurt()){
-			service.getBoard().attackSchipComputer();
+					AanvalStrategy strategy = new RandomAanvalStrategy();
+					strategy.attackSchipComputer(service.getBoard());
+
 			view.getBoardPlayer().repaint();
 				}
 			
 			}
 		}
 	}
+	
+	
 		
 	
 	

@@ -26,6 +26,7 @@ public class ZeeslagFrame extends JFrame {
 	private JRadioButton horizontaal = new JRadioButton("Horizontaal");
 	private JRadioButton verticaal = new JRadioButton("Verticaal");
 	private JButton start = new JButton("Start spel");
+	private JButton score = new JButton("score spel");
 
 	public ZeeslagFrame(BoardPanel board, BoardPanel boardOpponant){
 		super();
@@ -61,6 +62,9 @@ public class ZeeslagFrame extends JFrame {
 		start.setEnabled(false);
 		controlPanel.add(start);
 		
+		score.setEnabled(false);
+		controlPanel.add(score);
+		
 		mainPanel.add(controlPanel);
 	}
 	
@@ -91,6 +95,10 @@ public class ZeeslagFrame extends JFrame {
 	 
 	 public JButton getStartKnop(){
 		 return start;
+	 }
+	 
+	 public JButton getScoreKnop(){
+		 return score;
 	 }
 	 
 	 public SchipType getSchip() {

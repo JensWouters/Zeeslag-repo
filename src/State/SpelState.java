@@ -4,7 +4,7 @@ import domain.Board;
 
 public interface SpelState {
 	
-	public void plaatsSchepen(Board board);
+	public void plaatsSchepen();
 	public void startSpel(Board board);
 	
 	
