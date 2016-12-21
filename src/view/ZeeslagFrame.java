@@ -19,9 +19,10 @@ import domain.SchipType;
 
 public class ZeeslagFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private BoardPanel boardPlayer, boardOpponant;
-	private JLabel player1, player2;
+	private BoardPanel boardPlayer, boardOpponent;
+
 	private JPanel mainPanel = new JPanel();
+	private JLabel player1, player2;
 	private JComboBox<SchipType> schepen = new JComboBox<SchipType>(SchipType.values());
 	private JRadioButton horizontaal = new JRadioButton("Horizontaal");
 	private JRadioButton verticaal = new JRadioButton("Verticaal");
@@ -40,7 +41,8 @@ public class ZeeslagFrame extends JFrame {
 	
 	public void addControlPanel() {
 		JPanel controlPanel = new JPanel();
-		controlPanel.setLayout(new GridLayout(6,2));
+		controlPanel.setLayout(new GridLayout(8,1));
+		
 		
 		JLabel beschikbaar = new JLabel("Beschikbare schepen");
 		beschikbaar.setLocation(10, 10);
@@ -48,6 +50,7 @@ public class ZeeslagFrame extends JFrame {
 
 		schepen.setSelectedIndex(0);
 		controlPanel.add(schepen);
+		
 		
 		JLabel richting = new JLabel("Richting");
 		controlPanel.add(richting);
@@ -62,14 +65,16 @@ public class ZeeslagFrame extends JFrame {
 		start.setEnabled(false);
 		controlPanel.add(start);
 		
-		score.setEnabled(false);
-		controlPanel.add(score);
+		player1 = new JLabel((String) JOptionPane.showInputDialog(null, "Please enter username", "Please enter username", JOptionPane.QUESTION_MESSAGE,null,null,"player1"));
+		player2 = new JLabel("Computer");
+		controlPanel.add(player1);
+		controlPanel.add(player2);
 		
 		mainPanel.add(controlPanel);
 	}
 	
-	public void addPlayerBoards(BoardPanel bord, BoardPanel bordOpponant) {
-		player1 = new JLabel((String) JOptionPane.showInputDialog(null, "Please enter username", "Please enter username", JOptionPane.QUESTION_MESSAGE,null,null,"player1")); 
+	public void addPlayerBoards(BoardPanel bord, BoardPanel bordOpponent) {
+		 
 		boardPlayer = bord;
 		boardPlayer.setBackground(Color.GRAY);
 		boardPlayer.setSize(new Dimension(400,400));
@@ -77,20 +82,19 @@ public class ZeeslagFrame extends JFrame {
 		boardPlayer.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		mainPanel.add(boardPlayer);
 		
-		player2 = new JLabel("Computer");
-		boardOpponant = bordOpponant;
-		boardOpponant.setBackground(Color.GRAY);
-		boardOpponant.setSize(new Dimension(400,400));
-		boardOpponant.setLocation(475,50);
-		boardOpponant.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		mainPanel.add(boardOpponant);
+		boardOpponent = bordOpponent;
+		boardOpponent.setBackground(Color.GRAY);
+		boardOpponent.setSize(new Dimension(400,400));
+		boardOpponent.setLocation(475,50);
+		boardOpponent.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		mainPanel.add(boardOpponent);
 	}
 	 public BoardPanel getBoardPlayer(){
 		 return boardPlayer;
 	 }
 	 
-	 public BoardPanel getBoardOpponant(){
-		 return boardOpponant;
+	 public BoardPanel getBoardOpponent(){
+		 return boardOpponent;
 	 }
 	 
 	 public JButton getStartKnop(){

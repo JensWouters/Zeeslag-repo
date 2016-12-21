@@ -6,7 +6,7 @@ public interface ServiceInterface {
 	
 	public Board getBoard();
 	
-	public Board getBoardOpponant();
+	public Board getBoardOpponent();
 	
 	public void attackSchip(Position position);
 	
