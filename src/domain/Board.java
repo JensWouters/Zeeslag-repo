@@ -21,6 +21,14 @@ public class Board {
 	private boolean beurt;
 	
 	
+	private List<Integer> coordinatenVanSchepenOpponent = new ArrayList<Integer>();
+	private List<Integer> sizeVanSchepenOpponent = new ArrayList<Integer>();
+	private List<Integer> schip1Opponent;
+	private List<Integer> schip2Opponent;
+	private List<Integer> schip3Opponent;
+	private List<Integer> schip4Opponent;
+	private List<Integer> schip5Opponent;
+	
 	
 	public Board(int zijde, int aantal) {
 		int y = 0;
@@ -35,6 +43,18 @@ public class Board {
 	
 	public List<Vierkant> getVierkanten() {
 		return vierkanten;
+	}
+	
+	public int getSchepenOpBoard() {
+		return schepenOpBoard;
+	}
+	
+	public List<Integer> getCoordinatenVanSchepenOpponent() {
+		return this.coordinatenVanSchepenOpponent;
+	}
+	
+	public List<Integer> getSizeVanSchepenOpponent() {
+		return this.sizeVanSchepenOpponent;
 	}
 	public boolean getBeurt(){
 		return beurt;
@@ -100,7 +120,6 @@ public class Board {
 			 if ((nr+1 % 10) == 0) {
 				 return false;
 			 }
-			 
 			 for (int j = 1; j < schip.getSize(); j++) {
 				 nr++;
 				 if ((nr % 10) == 0) {
@@ -108,7 +127,6 @@ public class Board {
 				 }
 			 }
 		 }
-		 
 		 return true;
 	 }
 	 
@@ -122,7 +140,6 @@ public class Board {
 				 nr += 10;
 			 }
 		 }
-		
 		 return true;
 	 }
 	 
@@ -176,8 +193,6 @@ public class Board {
 		 } catch (IndexOutOfBoundsException e) {}
 	 }
 	 
-	 
-	 
 	 // Einde controle functies
 	 
 	 public void plaatsSchip(Richting richting, SchipType schip, Position positie) {
@@ -191,6 +206,7 @@ public class Board {
 								 this.setKleur(nr, Color.WHITE);
 								 setOmliggendeBezet(nr);
 								 this.getVierkanten().get(nr).setBezetSchip();
+								 vierkanten.get(nr).setBezetSchip();
 								 nr += 10;
 							 }
 						 }
@@ -199,6 +215,7 @@ public class Board {
 								 this.setKleur(nr, Color.WHITE);
 								 setOmliggendeBezet(nr);
 								 this.getVierkanten().get(nr).setBezetSchip();
+								 vierkanten.get(nr).setBezetSchip();
 								 nr++;
 							 }
 						 }
@@ -210,7 +227,7 @@ public class Board {
 	 }
 	 
 	 public void attackSchip(Position position){
-		 
+
 		 int nr = getNummer(position);
 		 Vierkant vierkant = this.getVierkanten().get(nr);
 		 if(vierkant.getKleur() == Color.LIGHT_GRAY || vierkant.getKleur() == Color.WHITE ){
@@ -223,9 +240,17 @@ public class Board {
 			 }
 		 }else if(vierkant.getKleur() == Color.GREEN || vierkant.getKleur() == Color.BLUE){
 			 this.setBeurt(false);
+		 if(this.getVierkanten().get(nr).getBezetSchip() == true){
+			 this.setKleur(nr, Color.GREEN);
+			 List<Integer> coordinaten = getAangevallenSchipOpponent(nr);
+			 vierkanten.get(nr).setHit();
+			 if (isKilled(coordinaten)) {
+				 killSchipOpponent(coordinaten);
+			 }
 		 }
 			 
 		
+	 }
 	 }
 	 
 	 public void attackSchipComputer(){
@@ -248,20 +273,56 @@ public class Board {
 			 else{
 				 this.attackSchipComputer();
 		 }
+
 			
 			 
 		 
 	 }
 		
-	 public void schipDown(){
-		 
-	 }
 	 
+	 public void killSchipOpponent(List<Integer> coordinaten) {
+		 for (Integer i : coordinaten) {
+			 this.setKleur(i, Color.RED);
+		 }
+	 }
 
-	public int getSchepenOpBoard() {
-		return schepenOpBoard;
+	public boolean isKilled(List<Integer> coordinaten) {
+		for (Integer i : coordinaten) {
+			if (!vierkanten.get(i).getHit()) {
+				return false;
+			}
+		}
+		return true;
 	}
 
-
-
+	public List<Integer> getAangevallenSchipOpponent(int nr) {
+		coordinatenPerSchipOpponent(coordinatenVanSchepenOpponent);
+		if (schip1Opponent.contains(nr)) {
+			return schip1Opponent;
+		} else if (schip2Opponent.contains(nr)) {
+			return schip2Opponent;
+		} else if (schip3Opponent.contains(nr)) {
+			return schip3Opponent;
+		} else if (schip4Opponent.contains(nr)) {
+			return schip4Opponent;
+		} else if (schip5Opponent.contains(nr)) {
+			return schip5Opponent;
+		}
+		return null;
+	}
+	
+	public void coordinatenPerSchipOpponent(List<Integer> coordinaten) {
+		int sizeSchip1 = sizeVanSchepenOpponent.get(0);
+		int sizeSchip2 = sizeVanSchepenOpponent.get(1);
+		int sizeSchip3 = sizeVanSchepenOpponent.get(2);
+		int sizeSchip4 = sizeVanSchepenOpponent.get(3);
+		
+		schip1Opponent = coordinaten.subList(0, sizeSchip1);
+		schip2Opponent = coordinaten.subList(sizeSchip1, sizeSchip1+sizeSchip2);
+		schip3Opponent = coordinaten.subList(sizeSchip1+sizeSchip2, sizeSchip1+sizeSchip2+sizeSchip3);
+		schip4Opponent = coordinaten.subList(sizeSchip1+sizeSchip2+sizeSchip3, sizeSchip1+sizeSchip2+sizeSchip3+sizeSchip4);
+		schip5Opponent = coordinaten.subList(sizeSchip1+sizeSchip2+sizeSchip3+sizeSchip4, coordinatenVanSchepenOpponent.size());
+	}
+	
+	//einde attack functies
 }

@@ -32,6 +32,7 @@ private int state = NEW_GAME;
 		view.getStartKnop().addMouseListener(new PlaatsSchipOpponentHandler());
 		view.getBoardOpponant().addMouseListener(new AttackSchepenHandler());
 		view.getBoardOpponant().addMouseListener(new AttackSchepenComputerHandler());
+
 		
 		
 	}

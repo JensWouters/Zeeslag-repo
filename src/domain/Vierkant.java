@@ -8,8 +8,9 @@ import java.awt.Graphics2D;
 public class Vierkant {
 	private int x,y,zijde;
 	private Color kleur;
-	public boolean bezet;
-	public boolean bezetSchip;
+	private boolean bezet;
+	private boolean bezetSchip;
+	private boolean isHit;
 	
 	
 	public Vierkant(int x, int y, int zijde, Color kleur) {
@@ -74,5 +75,13 @@ public class Vierkant {
 	
 	public int getY() {
 		return y;
+	}
+	
+	public boolean getHit() {
+		return this.isHit;
+	}
+	
+	public void setHit() {
+		this.isHit = true;
 	}
 }
