@@ -42,7 +42,7 @@ private int state = NEW_GAME;
 	private class ScoreHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event){
 			int scorePlayer = service.getBoard().getScore();
-			int scoreOpponant = service.getBoardOpponant().getScore();
+			int scoreOpponant = service.getBoardOpponent().getScore();
 			System.out.println("Player: " + scorePlayer + "\nOpponant: " + scoreOpponant);
 		}
 	}
