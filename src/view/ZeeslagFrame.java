@@ -40,7 +40,7 @@ public class ZeeslagFrame extends JFrame {
 	
 	public void addControlPanel() {
 		JPanel controlPanel = new JPanel();
-		controlPanel.setLayout(new GridLayout(6,2));
+		controlPanel.setLayout(new GridLayout(7,2));
 		
 		JLabel beschikbaar = new JLabel("Beschikbare schepen");
 		beschikbaar.setLocation(10, 10);
