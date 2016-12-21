@@ -233,21 +233,20 @@ public class Board {
 		 if(vierkant.getKleur() == Color.LIGHT_GRAY || vierkant.getKleur() == Color.WHITE ){
 			 if(this.getVierkanten().get(nr).getBezetSchip() == true){
 				 this.setKleur(nr, Color.GREEN);
+				 List<Integer> coordinaten = getAangevallenSchipOpponent(nr);
+				 vierkanten.get(nr).setHit();
+				 if (isKilled(coordinaten)) {
+					 killSchipOpponent(coordinaten);
+				 }
 				 this.setBeurt(true);
+			 
 			 }else{
 				 this.setKleur(nr, Color.BLUE);
 				 this.setBeurt(true);
 			 }
-		 }else if(vierkant.getKleur() == Color.GREEN || vierkant.getKleur() == Color.BLUE){
+		  		}else if(vierkant.getKleur() == Color.GREEN || vierkant.getKleur() == Color.BLUE){
 			 this.setBeurt(false);
-		 if(this.getVierkanten().get(nr).getBezetSchip() == true){
-			 this.setKleur(nr, Color.GREEN);
-			 List<Integer> coordinaten = getAangevallenSchipOpponent(nr);
-			 vierkanten.get(nr).setHit();
-			 if (isKilled(coordinaten)) {
-				 killSchipOpponent(coordinaten);
-			 }
-		 }
+		
 			 
 		
 	 }
