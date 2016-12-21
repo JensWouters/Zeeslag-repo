@@ -36,6 +36,15 @@ private int state = NEW_GAME;
 		view.getStartKnop().addMouseListener(new PlaatsSchipOpponentHandler());
 		view.getBoardOpponent().addMouseListener(new AttackSchepenHandler());
 		view.getBoardOpponent().addMouseListener(new AttackSchepenRandomComputerHandler());
+		view.getScoreKnop().addMouseListener(new ScoreHandler());
+	}
+	
+	private class ScoreHandler extends MouseAdapter{
+		public void mouseClicked(MouseEvent event){
+			int scorePlayer = service.getBoard().getScore();
+			int scoreOpponant = service.getBoardOpponant().getScore();
+			System.out.println("Player: " + scorePlayer + "\nOpponant: " + scoreOpponant);
+		}
 	}
 
 	private class PlaatsSchipHandler extends MouseAdapter{
