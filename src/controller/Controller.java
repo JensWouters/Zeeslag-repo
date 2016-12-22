@@ -11,8 +11,6 @@ import strategy.aanvalstrategy.AanvalStrategy;
 import strategy.aanvalstrategy.RandomAanvalStrategy;
 import view.BoardPanel;
 import view.ZeeslagFrame;
-import State.NieuwState;
-import State.SpelState;
 import domain.Board;
 import domain.Position;
 import domain.Service;
@@ -45,7 +43,7 @@ private int state = NEW_GAME;
 	private class ScoreHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event){
 			int score = service.getBoardOpponant().getScore();
-			System.out.println(score);
+			
 		}
 	}
 

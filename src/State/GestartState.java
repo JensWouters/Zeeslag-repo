@@ -8,13 +8,5 @@ public class GestartState implements SpelState{
 		board.setState(this);
 	}
 
-	public void plaatsSchepen(Board board) {
-		
-	}
-
-	public void plaatsSchepen() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 }
