@@ -10,7 +10,7 @@ public interface ServiceInterface {
 	
 	public void attackSchip(Position position);
 	
-	
+	public Spel getSpel();
 	
 
 }
