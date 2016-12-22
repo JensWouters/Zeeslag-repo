@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import State.SpelState;
+import launcher.Launcher;
 
 
 
@@ -19,8 +20,7 @@ public class Board {
 	private int schepenOpBoard = 0;
 	private SpelState state;
 	private boolean beurt;
-	private int geraakteBoten = 0;
-	private int deadShips;
+	private int deadShips = 0;
 	private int score = 19;
 	
 	private List<Integer> coordinatenVanSchepenOpponent = new ArrayList<Integer>();
@@ -108,11 +108,19 @@ public class Board {
 		score--;
 	}
 	
+	public void shipDied() {
+		deadShips++;
+	}
+	
 	public void setBezet(int nr) {
 		this.getVierkanten().get(nr).setBezet();
 	}
 	public boolean getBezet(int nr){
 		 return this.getVierkanten().get(nr).getBezet();
+	}
+	
+	public int getDeadShips() {
+		return deadShips;
 	}
 	
 	 public boolean isAvailable(SchipType schip) {
@@ -251,7 +259,6 @@ public class Board {
 	 }
 	 
 	 public void attackSchip(Position position, Board board){
-
 		 int nr = getNummer(position);
 		 Vierkant vierkant = this.getVierkanten().get(nr);
 		 if(vierkant.getKleur() == Color.LIGHT_GRAY || vierkant.getKleur() == Color.WHITE ){
@@ -261,6 +268,7 @@ public class Board {
 				 vierkanten.get(nr).setHit();
 				 if (isKilled(coordinaten)) {
 					 killSchip(coordinaten);
+					 deadShips++;
 				 }
 				 this.setBeurt(true);
 				 board.lowerScore();
@@ -268,7 +276,7 @@ public class Board {
 				 this.setKleur(nr, Color.BLUE);
 				 this.setBeurt(true);
 			 }
-		  		}else if(vierkant.getKleur() == Color.GREEN || vierkant.getKleur() == Color.BLUE ||
+		  		}	else if(vierkant.getKleur() == Color.GREEN || vierkant.getKleur() == Color.BLUE ||
 		  				vierkant.getKleur() == Color.RED){
 			 this.setBeurt(false);
 	 }
@@ -279,7 +287,7 @@ public class Board {
 		 for (Integer i : coordinaten) {
 			 this.setKleur(i, Color.RED);
 		 }
-		 deadShips++;
+		 
 	 }
 
 	public boolean isKilled(List<Integer> coordinaten) {

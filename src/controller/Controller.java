@@ -4,14 +4,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
-import strategy.RandomStrategy;
-import strategy.SpelStrategy;
-import strategy.aanvalstrategy.AanvalStrategy;
-import strategy.aanvalstrategy.RandomAanvalStrategy;
-import strategy.aanvalstrategy.RijAanvalStrategy;
-import view.BoardPanel;
-import view.ZeeslagFrame;
 import State.GestartState;
 import State.NieuwState;
 import State.SpelState;
@@ -19,18 +13,20 @@ import domain.Board;
 import domain.Position;
 import domain.Service;
 import domain.ServiceInterface;
+import strategy.RandomStrategy;
+import strategy.SpelStrategy;
+import strategy.aanvalstrategy.AanvalStrategy;
+import strategy.aanvalstrategy.RandomAanvalStrategy;
+import strategy.aanvalstrategy.RijAanvalStrategy;
+import view.BoardPanel;
+import view.ZeeslagFrame;
 
 public class Controller {
 private ZeeslagFrame view;
 private BoardPanel boardPanelPlayer, boardPanelOpponant;
 private ServiceInterface service = new Service();
-private final static int NEW_GAME = 0;
-private final static int START_GAME = 1; 
-private int state = NEW_GAME;
 private SpelState NieuwState = new NieuwState();
 private SpelState GestartState = new GestartState();
-
-
 
 	public Controller(){
 		boardPanelPlayer = new BoardPanel(service.getBoard());
@@ -46,6 +42,27 @@ private SpelState GestartState = new GestartState();
 		view.getBoardOpponent().addMouseListener(new AttackSchepenRandomComputerHandler());
 		view.getBoardOpponent().addMouseListener(new ScoreHandler());
 		view.getBoardPlayer().addMouseListener(new ScoreHandler());
+	}
+	
+	public String getEndText() {
+		String winnaar;
+		if (service.getBoard().getScore() > service.getBoardOpponent().getScore()) {
+			winnaar = view.getNamePlayer() + " heeft het spel gewonnen met een score van: " + service.getBoard().getScore(); 
+		} else {
+			winnaar = view.getNameOpponent() + " heeft het spel gewonnen met een score van: " + service.getBoardOpponent().getScore(); 
+		}
+		return "Game Over! Alle schepen zijn gezonken! \n" + winnaar;
+	}
+	
+	public void endGame() {
+		int rematch = JOptionPane.showOptionDialog(null, getEndText(), "GAME OVER", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Restart", "Leave"}, null);
+		if (rematch == JOptionPane.OK_OPTION) {
+			view.dispose();
+			service.getSpel().setState(NieuwState);
+			new Controller();
+		} else {
+			System.exit(0);
+		}
 	}
 	
 	private class ScoreHandler extends MouseAdapter{
@@ -84,41 +101,48 @@ private SpelState GestartState = new GestartState();
 	
 	private class AttackSchepenHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event){
-			if(service.getSpel().getState() == GestartState){
-			int x = event.getX();
-			int y = event.getY();
-			Position position = new Position(x,y);
-			service.getBoardOpponent().attackSchip(position, service.getBoardOpponent());
-			/*System.out.println(service.getBoard().getScore());
-			System.out.println(service.getBoardOpponent().getScore());*/
+			if (service.getBoard().getDeadShips() == 5 || service.getBoardOpponent().getDeadShips() == 5) {
+				endGame();
+			} else {
+				if(service.getSpel().getState() == GestartState){
+				int x = event.getX();
+				int y = event.getY();
+				Position position = new Position(x,y);
+				service.getBoardOpponent().attackSchip(position, service.getBoardOpponent());
+				}
+			}
 		}
-	}
 	}
 	
 	private class AttackSchepenRandomComputerHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event){
-			if(service.getSpel().getState() == GestartState){
-				view.getScoreKnop().setEnabled(true);
-				if(service.getBoardOpponent().getBeurt()){
-					AanvalStrategy strategy = new RandomAanvalStrategy(service.getBoard());
-					strategy.attackSchipComputer(service.getBoard());
-					view.getBoardPlayer().repaint();
+			if (service.getBoard().getDeadShips() == 5 || service.getBoardOpponent().getDeadShips() == 5) {
+				endGame();
+			} else {
+				if(service.getSpel().getState() == GestartState){
+					if(service.getBoardOpponent().getBeurt()){
+						AanvalStrategy strategy = new RandomAanvalStrategy(service.getBoard());
+						strategy.attackSchipComputer(service.getBoard());
+						view.getBoardPlayer().repaint();
+					}
 				}
-			
 			}
 		}
 	}
 	
 	private class AttackSchepenRijComputerHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event){
-			if(state == 1 || state == 2){
-				view.getScoreKnop().setEnabled(true);
-				if(service.getBoardOpponent().getBeurt()){
-					AanvalStrategy strategy = new RijAanvalStrategy(service.getBoard());
-					strategy.attackSchipComputer(service.getBoard());
-					view.getBoardPlayer().repaint();
+			if (service.getBoard().getDeadShips() == 5 || service.getBoardOpponent().getDeadShips() == 5) {
+				endGame();
+			} else {
+				if(service.getSpel().getState() == GestartState){
+					if(service.getBoardOpponent().getBeurt()){
+						AanvalStrategy strategy = new RijAanvalStrategy(service.getBoard());
+						strategy.attackSchipComputer(service.getBoard());
+						view.getBoardPlayer().repaint();
+					}
+				
 				}
-			
 			}
 		}
 	}

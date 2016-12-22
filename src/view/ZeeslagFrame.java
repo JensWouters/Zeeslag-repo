@@ -23,15 +23,14 @@ public class ZeeslagFrame extends JFrame implements Observer {
 	private static final long serialVersionUID = 1L;
 	private BoardPanel boardPlayer, boardOpponent;
 	private JPanel controlPanel;
-	private JLabel player1;
-	private String name = (String) JOptionPane.showInputDialog(null, "Please enter username", "Please enter username", JOptionPane.QUESTION_MESSAGE,null,null,"player1");
-	private JLabel player2 = new JLabel("Computer");
+	private JLabel player1, player2;
+	private String namePlayer = (String) JOptionPane.showInputDialog(null, "Please enter username", "Please enter username", JOptionPane.QUESTION_MESSAGE,null,null,"player1");
+	private String nameOpponent = (String) JOptionPane.showInputDialog(null, "Please enter username", "Please enter username", JOptionPane.QUESTION_MESSAGE,null,null,"player2");
 	private JPanel mainPanel = new JPanel();
 	private JComboBox<SchipType> schepen = new JComboBox<SchipType>(SchipType.values());
 	private JRadioButton horizontaal = new JRadioButton("Horizontaal");
 	private JRadioButton verticaal = new JRadioButton("Verticaal");
 	private JButton start = new JButton("Start spel");
-	private JButton score = new JButton("score spel");
 	
 	public ZeeslagFrame(BoardPanel board, BoardPanel boardOpponant){
 		super();
@@ -45,7 +44,7 @@ public class ZeeslagFrame extends JFrame implements Observer {
 	
 	public void addControlPanel() {
 		controlPanel = new JPanel();
-		controlPanel.setLayout(new GridLayout(9,1));
+		controlPanel.setLayout(new GridLayout(8,1));
 		
 		JLabel beschikbaar = new JLabel("Beschikbare schepen");
 		beschikbaar.setLocation(10, 10);
@@ -66,11 +65,9 @@ public class ZeeslagFrame extends JFrame implements Observer {
 		
 		start.setEnabled(false);
 		controlPanel.add(start);
-		
-		score.setEnabled(false);
-		controlPanel.add(score);
-		
-		player1 = new JLabel(name);
+
+		player1 = new JLabel(namePlayer);
+		player2 = new JLabel(nameOpponent);
 		controlPanel.add(player1);
 		controlPanel.add(player2);
 		
@@ -109,10 +106,6 @@ public class ZeeslagFrame extends JFrame implements Observer {
 		 return start;
 	 }
 	 
-	 public JButton getScoreKnop(){
-		 return score;
-	 }
-	 
 	 public SchipType getSchip() {
 		 return (SchipType) schepen.getSelectedItem();
 	 }
@@ -131,12 +124,20 @@ public class ZeeslagFrame extends JFrame implements Observer {
 	 public String getPlayer2() {
 		 return player2.getText();
 	 }
+	 
+	 public String getNamePlayer() {
+		 return namePlayer;
+	 }
+	 
+	 public String getNameOpponent() {
+		 return nameOpponent;
+	 }
 
 	public void update(int scorePlayer, int scoreOpponent) {
 		remove(player1);
 		remove(player2);
-		player1.setText(name + ": Score: " + scorePlayer);
-		player2.setText("Computer: Score: " + scoreOpponent);
+		player1.setText(namePlayer + ": Score: " + scorePlayer);
+		player2.setText(nameOpponent + ": Score: " + scoreOpponent);
 	}
 
 }

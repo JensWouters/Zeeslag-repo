@@ -39,6 +39,7 @@ public class RandomAanvalStrategy implements AanvalStrategy{
 				board.getVierkanten().get(nr).setHit();
 				if (isKilled(coordinaten)) {
 					killSchip(coordinaten);
+					board.shipDied();
 				}
 		 			
  			}else {
