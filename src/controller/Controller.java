@@ -146,32 +146,5 @@ private SpelState GestartState = new GestartState();
 			}
 		}
 	}
-	
-	
-		
-	
-	
-	
-	
-//	private class MouseClickHandler extends MouseAdapter{
-//		 public void mouseClicked(MouseEvent event){
-//			 int x = event.getX();
-//			 int y = event.getY();
-//			 int nr = -1;
-//			 for (int i = 0; i < view.getBoardPlayer().getVierkanten().size(); i++){
-//					if (view.getBoardPlayer().getVierkanten().get(i).isAangeklikt(x, y)){
-//						nr = i;
-//						if (!view.getBoardPlayer().getVierkanten().get(i).getBezet()){
-//							view.getBoardPlayer().setKleur(nr, Color.LIGHT_GRAY);
-//						}
-//						else{
-//							view.getBoardPlayer().setKleur(nr, Color.YELLOW);
-//						}
-//						view.getBoardOpponant().setKleur(nr, Color.RED);
-//						break;						
-//					}	
-//			 }
-//		 }
-//	 }
 }
 
