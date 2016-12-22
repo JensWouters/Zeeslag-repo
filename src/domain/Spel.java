@@ -60,7 +60,5 @@ public class Spel implements Subject {
 		for (Observer o : observers) {
 			o.update(scorePlayer, scoreOpponent);
 		}
-		System.out.println(scorePlayer);
-		System.out.println(scoreOpponent);
 	}
 }
