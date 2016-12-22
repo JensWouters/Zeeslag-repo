@@ -134,8 +134,6 @@ public class ZeeslagFrame extends JFrame implements Observer {
 	 }
 
 	public void update(int scorePlayer, int scoreOpponent) {
-		remove(player1);
-		remove(player2);
 		player1.setText(namePlayer + ": Score: " + scorePlayer);
 		player2.setText(nameOpponent + ": Score: " + scoreOpponent);
 	}
