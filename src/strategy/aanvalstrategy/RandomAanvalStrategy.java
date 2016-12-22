@@ -17,7 +17,7 @@ public class RandomAanvalStrategy implements AanvalStrategy{
 	private List<Integer> schip5;
 	
 	private int deadShips = 0;
-	private int score;
+	private int score = 19;
 	
 	public RandomAanvalStrategy(Board board) {
 		setBoard(board);

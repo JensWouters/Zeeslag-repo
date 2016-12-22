@@ -36,6 +36,7 @@ private SpelState GestartState = new GestartState();
 		boardPanelPlayer = new BoardPanel(service.getBoard());
 		boardPanelOpponant = new BoardPanel(service.getBoardOpponent());
 		view = new ZeeslagFrame(boardPanelPlayer, boardPanelOpponant);
+		service.getSpel().registerObserver(view);
 		service.getSpel().setState(NieuwState);
 		view.setVisible(true);
 		view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,15 +44,12 @@ private SpelState GestartState = new GestartState();
 		view.getStartKnop().addMouseListener(new PlaatsSchipOpponentHandler());
 		view.getBoardOpponent().addMouseListener(new AttackSchepenHandler());
 		view.getBoardOpponent().addMouseListener(new AttackSchepenRandomComputerHandler());
-		view.getScoreKnop().addMouseListener(new ScoreHandler());
 	}
 	
 	private class ScoreHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event){
-			int scorePlayer = service.getBoard().getScore();
-			int scoreOpponant = service.getBoardOpponent().getScore();
-			System.out.println("Player: " + scorePlayer + "\nOpponant: " + scoreOpponant);
-
+			service.getSpel().notifyObserver();
+			view.repaint();
 		}
 	}
 

@@ -21,7 +21,7 @@ public class Board {
 	private boolean beurt;
 	private int geraakteBoten = 0;
 	private int deadShips;
-	private final int MAX_SCORE = 19;
+	private int score = 19;
 	
 	private List<Integer> coordinatenVanSchepenOpponent = new ArrayList<Integer>();
 	private List<Integer> sizeVanSchepenOpponent = new ArrayList<Integer>();
@@ -101,7 +101,7 @@ public class Board {
 	}
 	
 	public int getScore(){
-		return MAX_SCORE - geraakteBoten;
+		return score;
 	}
 	
 	
@@ -260,7 +260,7 @@ public class Board {
 					 killSchip(coordinaten);
 				 }
 				 this.setBeurt(true);
-				 this.geraakteBoten++;
+				 this.score--;
 			 
 			 }else{
 				 this.setKleur(nr, Color.BLUE);

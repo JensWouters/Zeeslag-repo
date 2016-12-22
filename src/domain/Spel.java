@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Observer.Observer;
@@ -10,6 +11,7 @@ public class Spel implements Subject {
 	private Board board;
 	private Board boardOpponent;
 	private SpelState state;
+	private List<Observer> observers = new ArrayList<Observer>();
 	
 	public Spel() {
 		this.board = new Board(25,10);
@@ -39,14 +41,25 @@ public class Spel implements Subject {
 	public void attackSchip(Position position){
 		boardOpponent.attackSchip(position);
 	}
-
-	public void registerObserver(Observer o) {
-		// TODO Auto-generated method stub
-		
+	
+	public int getScorePlayer() {
+		return this.board.getScore();
+	}
+	
+	public int getScoreOpponent() {
+		return this.boardOpponent.getScore();
 	}
 
-	public void notifyObserver(List<Observer> observers) {
-		// TODO Auto-generated method stub
-		
+	public void registerObserver(Observer o) {
+		observers.add(o);
+	}
+
+	public void notifyObserver() {
+		int scorePlayer = this.getScorePlayer();
+		int scoreOpponent = this.getScoreOpponent();
+		for (Observer o : observers) {
+			o.update(scorePlayer, scoreOpponent);
+		}
+		System.out.println(scorePlayer);
 	}
 }

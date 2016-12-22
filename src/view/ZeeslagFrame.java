@@ -14,10 +14,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import Observer.Observer;
 import domain.Richting;
 import domain.SchipType;
 
-public class ZeeslagFrame extends JFrame {
+public class ZeeslagFrame extends JFrame implements Observer {
+	
 	private static final long serialVersionUID = 1L;
 	private BoardPanel boardPlayer, boardOpponent;
 	private JLabel player1, player2;
@@ -27,6 +29,8 @@ public class ZeeslagFrame extends JFrame {
 	private JRadioButton verticaal = new JRadioButton("Verticaal");
 	private JButton start = new JButton("Start spel");
 	private JButton score = new JButton("score spel");
+	
+	private int scorePlayer, scoreOpponent;
 
 	public ZeeslagFrame(BoardPanel board, BoardPanel boardOpponant){
 		super();
@@ -65,8 +69,8 @@ public class ZeeslagFrame extends JFrame {
 		score.setEnabled(false);
 		controlPanel.add(score);
 		
-		player1 = new JLabel((String) JOptionPane.showInputDialog(null, "Please enter username", "Please enter username", JOptionPane.QUESTION_MESSAGE,null,null,"player1"));
-		player2 = new JLabel("Computer");
+		player1 = new JLabel((String) JOptionPane.showInputDialog(null, "Please enter username", "Please enter username", JOptionPane.QUESTION_MESSAGE,null,null,"player1") + " score: " + scorePlayer);
+		player2 = new JLabel("Computer: score: " + scoreOpponent);
 		controlPanel.add(player1);
 		controlPanel.add(player2);
 		
@@ -115,5 +119,10 @@ public class ZeeslagFrame extends JFrame {
 		 }
 		 else return Richting.VERTICAAL;
 	 }
+
+	public void update(int scorePlayer, int scoreOpponent) {
+		this.scorePlayer = scorePlayer;
+		this.scoreOpponent = scoreOpponent;
+	}
 
 }
