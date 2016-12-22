@@ -97,4 +97,8 @@ public class RijAanvalStrategy implements AanvalStrategy{
 		return 0;
 	}
 
+	public int getDeadShips() {
+		return deadShips;
+	}
+
 }

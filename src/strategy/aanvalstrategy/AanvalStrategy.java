@@ -13,5 +13,6 @@ public interface AanvalStrategy {
 	public List<Integer> getAangevallenSchip(int nr);
 	public void coordinatenPerSchip(List<Integer> coordinaten);
 	public int getScore();
+	public int getDeadShips();
 
 }

@@ -55,10 +55,16 @@ public class RandomAanvalStrategy implements AanvalStrategy{
 	}
 	
 	 public void killSchip(List<Integer> coordinaten) {
+		 if (deadShips != 5) {
 		 for (Integer i : coordinaten) {
 			 board.setKleur(i, Color.RED);
 		 }
+		 }
 		 deadShips++;
+	 }
+	 
+	 public int getDeadShips() {
+		 return deadShips;
 	 }
 
 	public boolean isKilled(List<Integer> coordinaten) {

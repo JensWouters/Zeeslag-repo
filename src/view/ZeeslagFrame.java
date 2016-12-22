@@ -19,7 +19,7 @@ import domain.SchipType;
 
 public class ZeeslagFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private BoardPanel boardPlayer, boardOpponant;
+	private BoardPanel boardPlayer, boardOpponent;
 	private JLabel player1, player2;
 	private JPanel mainPanel = new JPanel();
 	private JComboBox<SchipType> schepen = new JComboBox<SchipType>(SchipType.values());
@@ -93,8 +93,8 @@ public class ZeeslagFrame extends JFrame {
 		 return boardPlayer;
 	 }
 	 
-	 public BoardPanel getBoardOpponant(){
-		 return boardOpponant;
+	 public BoardPanel getBoardOpponent(){
+		 return boardOpponent;
 	 }
 	 
 	 public JButton getStartKnop(){

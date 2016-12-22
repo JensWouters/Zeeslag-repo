@@ -5,6 +5,9 @@ import java.util.List;
 import domain.Board;
 
 public class SmartAanvalStrategy implements AanvalStrategy{
+	
+	public int score = 19;
+	public int deadShips = 0;
 
 	public void attackSchipComputer(Board board) {
 		
@@ -34,6 +37,10 @@ public class SmartAanvalStrategy implements AanvalStrategy{
 	public int getScore() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public int getDeadShips() {
+		return deadShips;
 	}
 
 }
