@@ -104,6 +104,7 @@ private SpelState GestartState = new GestartState();
 					strategy.attackSchipComputer(service.getBoard());
 					view.getBoardPlayer().repaint();
 					System.out.println(strategy.getScore());
+				
 				}
 			
 			}

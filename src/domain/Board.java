@@ -49,6 +49,8 @@ public class Board {
 		return vierkanten;
 	}
 	
+
+	
 	public int getSchepenOpBoard() {
 		return schepenOpBoard;
 	}
