@@ -19,8 +19,9 @@ public class Board {
 	private int schepenOpBoard = 0;
 	private SpelState state;
 	private boolean beurt;
-	 int score;
-	
+	private int geraakteBoten = 0;
+	private int deadShips;
+	private final int MAX_SCORE = 19;
 	
 	private List<Integer> coordinatenVanSchepenOpponent = new ArrayList<Integer>();
 	private List<Integer> sizeVanSchepenOpponent = new ArrayList<Integer>();
@@ -30,6 +31,8 @@ public class Board {
 	private List<Integer> schip4Opponent;
 	private List<Integer> schip5Opponent;
 	
+	private List<Integer> coordinatenVanSchepen = new ArrayList<Integer>();
+	private List<Integer> sizeVanSchepen = new ArrayList<Integer>();
 	
 	public Board(int zijde, int aantal) {
 		int y = 0;
@@ -57,6 +60,15 @@ public class Board {
 	public List<Integer> getSizeVanSchepenOpponent() {
 		return this.sizeVanSchepenOpponent;
 	}
+	
+	public List<Integer> getCoordinatenVanSchepen() {
+		return this.coordinatenVanSchepen;
+	}
+	
+	public List<Integer> getSizeVanSchepen() {
+		return this.sizeVanSchepen;
+	}
+	
 	public boolean getBeurt(){
 		return beurt;
 	}
@@ -89,7 +101,7 @@ public class Board {
 	}
 	
 	public int getScore(){
-		return score - 19;
+		return MAX_SCORE - geraakteBoten;
 	}
 	
 	
@@ -207,12 +219,14 @@ public class Board {
 			 if (fitsBoardVertical(richting, schip, positie) && fitsBoardHorizontal(richting, schip, positie)) {
 				 if (!overlapsShip(richting, schip, positie)) {
 					 if (isAvailable(schip)) {	
+							 getSizeVanSchepen().add(schip.getSize());
 						 if (richting.equals(Richting.HORIZONTAAL)) {
 							 for (int j = 0; j < schip.getSize(); j++) {
 								 this.setKleur(nr, Color.WHITE);
 								 setOmliggendeBezet(nr);
 								 this.getVierkanten().get(nr).setBezetSchip();
 								 vierkanten.get(nr).setBezetSchip();
+								 getCoordinatenVanSchepen().add(nr);
 								 nr += 10;
 							 }
 						 }
@@ -222,6 +236,7 @@ public class Board {
 								 setOmliggendeBezet(nr);
 								 this.getVierkanten().get(nr).setBezetSchip();
 								 vierkanten.get(nr).setBezetSchip();
+								 getCoordinatenVanSchepen().add(nr);
 								 nr++;
 							 }
 						 }
@@ -242,32 +257,27 @@ public class Board {
 				 List<Integer> coordinaten = getAangevallenSchipOpponent(nr);
 				 vierkanten.get(nr).setHit();
 				 if (isKilled(coordinaten)) {
-					 killSchipOpponent(coordinaten);
+					 killSchip(coordinaten);
 				 }
 				 this.setBeurt(true);
-				 this.score +=0;
+				 this.geraakteBoten++;
 			 
 			 }else{
 				 this.setKleur(nr, Color.BLUE);
 				 this.setBeurt(true);
-				 this.score++;
 			 }
 		  		}else if(vierkant.getKleur() == Color.GREEN || vierkant.getKleur() == Color.BLUE ||
 		  				vierkant.getKleur() == Color.RED){
 			 this.setBeurt(false);
-		
-			 
-		
 	 }
 	 }
 	 
 	 
-		
-	 
-	 public void killSchipOpponent(List<Integer> coordinaten) {
+	 public void killSchip(List<Integer> coordinaten) {
 		 for (Integer i : coordinaten) {
 			 this.setKleur(i, Color.RED);
 		 }
+		 deadShips++;
 	 }
 
 	public boolean isKilled(List<Integer> coordinaten) {
@@ -307,6 +317,8 @@ public class Board {
 		schip4Opponent = coordinaten.subList(sizeSchip1+sizeSchip2+sizeSchip3, sizeSchip1+sizeSchip2+sizeSchip3+sizeSchip4);
 		schip5Opponent = coordinaten.subList(sizeSchip1+sizeSchip2+sizeSchip3+sizeSchip4, coordinatenVanSchepenOpponent.size());
 	}
+	
+
 	
 	//einde attack functies
 }

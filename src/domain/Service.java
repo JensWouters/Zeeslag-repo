@@ -21,7 +21,7 @@ public class Service implements ServiceInterface {
 		return board;
 	}
 	
-	public Board getBoardOpponant() {
+	public Board getBoardOpponent() {
 		return this.boardOpponent;
 	}
 	
