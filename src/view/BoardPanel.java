@@ -1,11 +1,8 @@
 package view;
 
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.util.List;
 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 

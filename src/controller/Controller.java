@@ -17,7 +17,6 @@ import strategy.RandomStrategy;
 import strategy.SpelStrategy;
 import strategy.aanvalstrategy.AanvalStrategy;
 import strategy.aanvalstrategy.RandomAanvalStrategy;
-import strategy.aanvalstrategy.RijAanvalStrategy;
 import view.BoardPanel;
 import view.ZeeslagFrame;
 
@@ -125,23 +124,6 @@ private SpelState GestartState = new GestartState();
 						strategy.attackSchipComputer(service.getBoard());
 						view.getBoardPlayer().repaint();
 					}
-				}
-			}
-		}
-	}
-	
-	private class AttackSchepenRijComputerHandler extends MouseAdapter{
-		public void mouseClicked(MouseEvent event){
-			if (service.getBoard().getDeadShips() == 5 || service.getBoardOpponent().getDeadShips() == 5) {
-				endGame();
-			} else {
-				if(service.getSpel().getState() == GestartState){
-					if(service.getBoardOpponent().getBeurt()){
-						AanvalStrategy strategy = new RijAanvalStrategy(service.getBoard());
-						strategy.attackSchipComputer(service.getBoard());
-						view.getBoardPlayer().repaint();
-					}
-				
 				}
 			}
 		}

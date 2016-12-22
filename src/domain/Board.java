@@ -8,9 +8,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import State.SpelState;
-import launcher.Launcher;
-
-
 
 public class Board {
 	
