@@ -9,8 +9,6 @@ import javax.swing.JOptionPane;
 
 import State.SpelState;
 
-
-
 public class Board {
 	
 	private List<Vierkant> vierkanten = new ArrayList<Vierkant>();
@@ -19,9 +17,8 @@ public class Board {
 	private int schepenOpBoard = 0;
 	private SpelState state;
 	private boolean beurt;
-	private int geraakteBoten = 0;
-	private int deadShips;
-	private final int MAX_SCORE = 19;
+	private int deadShips = 0;
+	private int score = 19;
 	
 	private List<Integer> coordinatenVanSchepenOpponent = new ArrayList<Integer>();
 	private List<Integer> sizeVanSchepenOpponent = new ArrayList<Integer>();
@@ -103,15 +100,26 @@ public class Board {
 	}
 	
 	public int getScore(){
-		return MAX_SCORE - geraakteBoten;
+		return score;
 	}
 	
+	public void lowerScore() {
+		score--;
+	}
+	
+	public void shipDied() {
+		deadShips++;
+	}
 	
 	public void setBezet(int nr) {
 		this.getVierkanten().get(nr).setBezet();
 	}
 	public boolean getBezet(int nr){
 		 return this.getVierkanten().get(nr).getBezet();
+	}
+	
+	public int getDeadShips() {
+		return deadShips;
 	}
 	
 	 public boolean isAvailable(SchipType schip) {
@@ -187,30 +195,44 @@ public class Board {
 	 
 	 public void setOmliggendeBezet(int nr) {
 		 List<Vierkant> vierkanten = this.getVierkanten();
-	 	 try {
-		 vierkanten.get(nr-10).setBezet();
-	 	 } catch (IndexOutOfBoundsException e) {}
-		 try {
-		 vierkanten.get(nr+10).setBezet();
-		 } catch (IndexOutOfBoundsException e) {}
-		 try {
-		 vierkanten.get(nr-1).setBezet();
-		 } catch (IndexOutOfBoundsException e) {}
-		 try {
-		 vierkanten.get(nr+1).setBezet();
-		 } catch (IndexOutOfBoundsException e) {}
-		 try {
-		 vierkanten.get(nr-9).setBezet();
-		 } catch (IndexOutOfBoundsException e) {}
-		 try {
-		 vierkanten.get(nr+9).setBezet();
-		 } catch (IndexOutOfBoundsException e) {}
-		 try {
-		 vierkanten.get(nr-11).setBezet();
-		 } catch (IndexOutOfBoundsException e) {}
-		 try {
-		 vierkanten.get(nr+11).setBezet();
-		 } catch (IndexOutOfBoundsException e) {}
+		 if (nr % 10 == 0) {
+			 vierkanten.get(nr+1).setBezet();
+			 vierkanten.get(nr-10).setBezet();
+			 vierkanten.get(nr-9).setBezet();
+			 vierkanten.get(nr+10).setBezet();
+			 vierkanten.get(nr+11).setBezet();
+		 } else if (nr % 10 == 9) {
+			 vierkanten.get(nr-10).setBezet();
+			 vierkanten.get(nr+10).setBezet();
+			 vierkanten.get(nr-1).setBezet();
+			 vierkanten.get(nr-9).setBezet();
+			 vierkanten.get(nr+9).setBezet();
+		 } else {
+		 	 try {
+			 vierkanten.get(nr-10).setBezet();
+		 	 } catch (IndexOutOfBoundsException e) {}
+			 try {
+			 vierkanten.get(nr+10).setBezet();
+			 } catch (IndexOutOfBoundsException e) {}
+			 try {
+			 vierkanten.get(nr-1).setBezet();
+			 } catch (IndexOutOfBoundsException e) {}
+			 try {
+			 vierkanten.get(nr+1).setBezet();
+			 } catch (IndexOutOfBoundsException e) {}
+			 try {
+			 vierkanten.get(nr-9).setBezet();
+			 } catch (IndexOutOfBoundsException e) {}
+			 try {
+			 vierkanten.get(nr+9).setBezet();
+			 } catch (IndexOutOfBoundsException e) {}
+			 try {
+			 vierkanten.get(nr-11).setBezet();
+			 } catch (IndexOutOfBoundsException e) {}
+			 try {
+			 vierkanten.get(nr+11).setBezet();
+			 } catch (IndexOutOfBoundsException e) {}
+		 }
 	 }
 	 
 	 // Einde controle functies
@@ -249,8 +271,7 @@ public class Board {
 		 } else { JOptionPane.showMessageDialog(null, "Je mag maar 5 schepen plaatsen!"); } 
 	 }
 	 
-	 public void attackSchip(Position position){
-
+	 public void attackSchip(Position position, Board board){
 		 int nr = getNummer(position);
 		 Vierkant vierkant = this.getVierkanten().get(nr);
 		 if(vierkant.getKleur() == Color.LIGHT_GRAY || vierkant.getKleur() == Color.WHITE ){
@@ -260,15 +281,15 @@ public class Board {
 				 vierkanten.get(nr).setHit();
 				 if (isKilled(coordinaten)) {
 					 killSchip(coordinaten);
+					 deadShips++;
 				 }
 				 this.setBeurt(true);
-				 this.geraakteBoten++;
-			 
+				 board.lowerScore();
 			 }else{
 				 this.setKleur(nr, Color.BLUE);
 				 this.setBeurt(true);
 			 }
-		  		}else if(vierkant.getKleur() == Color.GREEN || vierkant.getKleur() == Color.BLUE ||
+		  		}	else if(vierkant.getKleur() == Color.GREEN || vierkant.getKleur() == Color.BLUE ||
 		  				vierkant.getKleur() == Color.RED){
 			 this.setBeurt(false);
 	 }
@@ -279,7 +300,7 @@ public class Board {
 		 for (Integer i : coordinaten) {
 			 this.setKleur(i, Color.RED);
 		 }
-		 deadShips++;
+		 
 	 }
 
 	public boolean isKilled(List<Integer> coordinaten) {

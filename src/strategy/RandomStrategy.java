@@ -12,11 +12,7 @@ import domain.Vierkant;
 
 public class RandomStrategy implements SpelStrategy {
 	private int schepenOpBoard = 0;
-	
-	
-	
-	
-	
+
 	public void plaatsSchipOpponent(Board board) {
 		while(schepenOpBoard < 5) {
 			int x = (int)(Math.random() *100);
@@ -50,13 +46,10 @@ public class RandomStrategy implements SpelStrategy {
  								 }
 				 }
 				 schepenOpBoard++;
-			 		 	
 						 } 
 					 } 
 				 }
 	 }
-
-	
 	}
 
 }

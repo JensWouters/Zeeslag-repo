@@ -14,21 +14,24 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import Observer.Observer;
 import domain.Richting;
 import domain.SchipType;
 
-public class ZeeslagFrame extends JFrame {
+public class ZeeslagFrame extends JFrame implements Observer {
+	
 	private static final long serialVersionUID = 1L;
 	private BoardPanel boardPlayer, boardOpponent;
-
-	private JPanel mainPanel = new JPanel();
+	private JPanel controlPanel;
 	private JLabel player1, player2;
+	private String namePlayer = (String) JOptionPane.showInputDialog(null, "Please enter username", "Please enter username", JOptionPane.QUESTION_MESSAGE,null,null,"player1");
+	private String nameOpponent = (String) JOptionPane.showInputDialog(null, "Please enter username", "Please enter username", JOptionPane.QUESTION_MESSAGE,null,null,"player2");
+	private JPanel mainPanel = new JPanel();
 	private JComboBox<SchipType> schepen = new JComboBox<SchipType>(SchipType.values());
 	private JRadioButton horizontaal = new JRadioButton("Horizontaal");
 	private JRadioButton verticaal = new JRadioButton("Verticaal");
 	private JButton start = new JButton("Start spel");
-	private JButton score = new JButton("score spel");
-
+	
 	public ZeeslagFrame(BoardPanel board, BoardPanel boardOpponant){
 		super();
 		this.setSize( 800, 300 );
@@ -40,10 +43,8 @@ public class ZeeslagFrame extends JFrame {
 	}
 	
 	public void addControlPanel() {
-		JPanel controlPanel = new JPanel();
-		controlPanel.setLayout(new GridLayout(9,1));
-		
-		//controlPanel.setLayout(new GridLayout(7,2));
+		controlPanel = new JPanel();
+		controlPanel.setLayout(new GridLayout(8,1));
 		
 		JLabel beschikbaar = new JLabel("Beschikbare schepen");
 		beschikbaar.setLocation(10, 10);
@@ -51,7 +52,6 @@ public class ZeeslagFrame extends JFrame {
 
 		schepen.setSelectedIndex(0);
 		controlPanel.add(schepen);
-		
 		
 		JLabel richting = new JLabel("Richting");
 		controlPanel.add(richting);
@@ -65,12 +65,9 @@ public class ZeeslagFrame extends JFrame {
 		
 		start.setEnabled(false);
 		controlPanel.add(start);
-		
-		score.setEnabled(false);
-		controlPanel.add(score);
-		
-		player1 = new JLabel((String) JOptionPane.showInputDialog(null, "Please enter username", "Please enter username", JOptionPane.QUESTION_MESSAGE,null,null,"player1"));
-		player2 = new JLabel("Computer");
+
+		player1 = new JLabel(namePlayer);
+		player2 = new JLabel(nameOpponent);
 		controlPanel.add(player1);
 		controlPanel.add(player2);
 		
@@ -97,16 +94,16 @@ public class ZeeslagFrame extends JFrame {
 		 return boardPlayer;
 	 }
 	 
+	 public void repaintControlPanel() {
+		 controlPanel.repaint();
+	 }
+	 
 	 public BoardPanel getBoardOpponent(){
 		 return boardOpponent;
 	 }
 	 
 	 public JButton getStartKnop(){
 		 return start;
-	 }
-	 
-	 public JButton getScoreKnop(){
-		 return score;
 	 }
 	 
 	 public SchipType getSchip() {
@@ -119,5 +116,26 @@ public class ZeeslagFrame extends JFrame {
 		 }
 		 else return Richting.VERTICAAL;
 	 }
+	 
+	 public String getPlayer1() {
+		 return player1.getText();
+	 }
+	 
+	 public String getPlayer2() {
+		 return player2.getText();
+	 }
+	 
+	 public String getNamePlayer() {
+		 return namePlayer;
+	 }
+	 
+	 public String getNameOpponent() {
+		 return nameOpponent;
+	 }
+
+	public void update(int scorePlayer, int scoreOpponent) {
+		player1.setText(namePlayer + ": Score: " + scorePlayer);
+		player2.setText(nameOpponent + ": Score: " + scoreOpponent);
+	}
 
 }

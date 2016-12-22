@@ -17,7 +17,6 @@ public class RandomAanvalStrategy implements AanvalStrategy{
 	private List<Integer> schip5;
 	
 	private int deadShips = 0;
-	private int score;
 	
 	public RandomAanvalStrategy(Board board) {
 		setBoard(board);
@@ -25,10 +24,6 @@ public class RandomAanvalStrategy implements AanvalStrategy{
 
 	private void setBoard(Board board) {
 		this.board = board;
-	}
-	
-	public int getScore() {
-		return this.score;
 	}
 	
 	public void attackSchipComputer(Board board) {
@@ -39,11 +34,12 @@ public class RandomAanvalStrategy implements AanvalStrategy{
 		 if(vierkant.getKleur().equals(Color.LIGHT_GRAY) || vierkant.getKleur().equals(Color.WHITE)){
 		 	if(board.getVierkanten().get(nr).getBezetSchip() == true){
 	 			board.setKleur(nr, Color.GREEN);
-	 			score--;
+	 			board.lowerScore();
 	 			List<Integer> coordinaten = getAangevallenSchip(nr);
 				board.getVierkanten().get(nr).setHit();
 				if (isKilled(coordinaten)) {
 					killSchip(coordinaten);
+					board.shipDied();
 				}
 		 			
  			}else {
@@ -55,10 +51,16 @@ public class RandomAanvalStrategy implements AanvalStrategy{
 	}
 	
 	 public void killSchip(List<Integer> coordinaten) {
+		 if (deadShips != 5) {
 		 for (Integer i : coordinaten) {
 			 board.setKleur(i, Color.RED);
 		 }
+		 }
 		 deadShips++;
+	 }
+	 
+	 public int getDeadShips() {
+		 return deadShips;
 	 }
 
 	public boolean isKilled(List<Integer> coordinaten) {

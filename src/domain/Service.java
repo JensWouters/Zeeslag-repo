@@ -29,7 +29,7 @@ public class Service implements ServiceInterface {
 	}
 	
 	public void attackSchip(Position position){
-		spel.getBoardOpponent().attackSchip(position);
+		spel.getBoardOpponent().attackSchip(position, spel.getBoardOpponent());
 	}
 	
 	

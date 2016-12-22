@@ -4,14 +4,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
-import strategy.RandomStrategy;
-import strategy.SpelStrategy;
-import strategy.aanvalstrategy.AanvalStrategy;
-import strategy.aanvalstrategy.RandomAanvalStrategy;
-import strategy.aanvalstrategy.RijAanvalStrategy;
-import view.BoardPanel;
-import view.ZeeslagFrame;
 import State.GestartState;
 import State.NieuwState;
 import State.SpelState;
@@ -19,23 +13,25 @@ import domain.Board;
 import domain.Position;
 import domain.Service;
 import domain.ServiceInterface;
+import strategy.RandomStrategy;
+import strategy.SpelStrategy;
+import strategy.aanvalstrategy.AanvalStrategy;
+import strategy.aanvalstrategy.RandomAanvalStrategy;
+import view.BoardPanel;
+import view.ZeeslagFrame;
 
 public class Controller {
 private ZeeslagFrame view;
 private BoardPanel boardPanelPlayer, boardPanelOpponant;
 private ServiceInterface service = new Service();
-private final static int NEW_GAME = 0;
-private final static int START_GAME = 1; 
-private int state = NEW_GAME;
 private SpelState NieuwState = new NieuwState();
 private SpelState GestartState = new GestartState();
-
-
 
 	public Controller(){
 		boardPanelPlayer = new BoardPanel(service.getBoard());
 		boardPanelOpponant = new BoardPanel(service.getBoardOpponent());
 		view = new ZeeslagFrame(boardPanelPlayer, boardPanelOpponant);
+		service.getSpel().registerObserver(view);
 		service.getSpel().setState(NieuwState);
 		view.setVisible(true);
 		view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,27 +39,47 @@ private SpelState GestartState = new GestartState();
 		view.getStartKnop().addMouseListener(new PlaatsSchipOpponentHandler());
 		view.getBoardOpponent().addMouseListener(new AttackSchepenHandler());
 		view.getBoardOpponent().addMouseListener(new AttackSchepenRandomComputerHandler());
-		view.getScoreKnop().addMouseListener(new ScoreHandler());
+		view.getBoardOpponent().addMouseListener(new ScoreHandler());
+		view.getBoardPlayer().addMouseListener(new ScoreHandler());
+	}
+	
+	public String getEndText() {
+		String winnaar;
+		if (service.getBoard().getScore() > service.getBoardOpponent().getScore()) {
+			winnaar = view.getNamePlayer() + " heeft het spel gewonnen met een score van: " + service.getBoard().getScore(); 
+		} else {
+			winnaar = view.getNameOpponent() + " heeft het spel gewonnen met een score van: " + service.getBoardOpponent().getScore(); 
+		}
+		return "Game Over! Alle schepen zijn gezonken! \n" + winnaar;
+	}
+	
+	public void endGame() {
+		int rematch = JOptionPane.showOptionDialog(null, getEndText(), "GAME OVER", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Restart", "Leave"}, null);
+		if (rematch == JOptionPane.OK_OPTION) {
+			view.dispose();
+			service.getSpel().setState(NieuwState);
+			new Controller();
+		} else {
+			System.exit(0);
+		}
 	}
 	
 	private class ScoreHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event){
-			int scorePlayer = service.getBoard().getScore();
-			int scoreOpponant = service.getBoardOpponent().getScore();
-			System.out.println("Player: " + scorePlayer + "\nOpponant: " + scoreOpponant);
-
+			service.getSpel().notifyObservers();
+			view.repaint();
 		}
 	}
 
 	private class PlaatsSchipHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event) {
 			if (service.getSpel().getState() == NieuwState ) {
-			Position positie = new Position(event.getX(), event.getY());
-			service.plaatsSchip(view.getRichting(), view.getSchip(), positie);
-			view.getBoardPlayer().repaint();
-			if (boardPanelPlayer.getSchepenOpBoard() == 5){
-				view.getStartKnop().setEnabled(true);
-			}
+				Position positie = new Position(event.getX(), event.getY());
+				service.plaatsSchip(view.getRichting(), view.getSchip(), positie);
+				view.getBoardPlayer().repaint();
+				if (boardPanelPlayer.getSchepenOpBoard() == 5){
+					view.getStartKnop().setEnabled(true);
+				}
 			}
 			
 		}
@@ -84,72 +100,36 @@ private SpelState GestartState = new GestartState();
 	
 	private class AttackSchepenHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event){
-			if(service.getSpel().getState() == GestartState){
-			int x = event.getX();
-			int y = event.getY();
-			Position position = new Position(x,y);
-			service.getBoardOpponent().attackSchip(position);
-			view.getBoardOpponent().repaint();
-			System.out.println(service.getBoard().getScore());
+			if (service.getBoard().getDeadShips() == 5 || service.getBoardOpponent().getDeadShips() == 5) {
+				endGame();
+			} else {
+				if(service.getSpel().getState() == GestartState){
+				int x = event.getX();
+				int y = event.getY();
+				Position position = new Position(x,y);
+				service.getBoardOpponent().attackSchip(position, service.getBoardOpponent());
+				}
+			}
 		}
-	}
 	}
 	
 	private class AttackSchepenRandomComputerHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event){
-			if(service.getSpel().getState() == GestartState){
-				view.getScoreKnop().setEnabled(true);
-				if(service.getBoardOpponent().getBeurt()){
-					AanvalStrategy strategy = new RandomAanvalStrategy(service.getBoard());
-					strategy.attackSchipComputer(service.getBoard());
-					view.getBoardPlayer().repaint();
-					System.out.println(strategy.getScore());
-				
+
+
+			if (service.getBoard().getDeadShips() == 5 || service.getBoardOpponent().getDeadShips() == 5) {
+				endGame();
+			} else {
+				if(service.getSpel().getState() == GestartState){
+					if(service.getBoardOpponent().getBeurt()){
+						AanvalStrategy strategy = new RandomAanvalStrategy(service.getBoard());
+						strategy.attackSchipComputer(service.getBoard());
+						view.getBoardPlayer().repaint();
+					}
+
 				}
-			
 			}
 		}
 	}
-	
-	private class AttackSchepenRijComputerHandler extends MouseAdapter{
-		public void mouseClicked(MouseEvent event){
-			if(state == 1 || state == 2){
-				view.getScoreKnop().setEnabled(true);
-				if(service.getBoardOpponent().getBeurt()){
-					AanvalStrategy strategy = new RijAanvalStrategy(service.getBoard());
-					strategy.attackSchipComputer(service.getBoard());
-					view.getBoardPlayer().repaint();
-				}
-			
-			}
-		}
-	}
-	
-	
-		
-	
-	
-	
-	
-//	private class MouseClickHandler extends MouseAdapter{
-//		 public void mouseClicked(MouseEvent event){
-//			 int x = event.getX();
-//			 int y = event.getY();
-//			 int nr = -1;
-//			 for (int i = 0; i < view.getBoardPlayer().getVierkanten().size(); i++){
-//					if (view.getBoardPlayer().getVierkanten().get(i).isAangeklikt(x, y)){
-//						nr = i;
-//						if (!view.getBoardPlayer().getVierkanten().get(i).getBezet()){
-//							view.getBoardPlayer().setKleur(nr, Color.LIGHT_GRAY);
-//						}
-//						else{
-//							view.getBoardPlayer().setKleur(nr, Color.YELLOW);
-//						}
-//						view.getBoardOpponant().setKleur(nr, Color.RED);
-//						break;						
-//					}	
-//			 }
-//		 }
-//	 }
 }
 
