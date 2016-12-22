@@ -22,7 +22,10 @@ public class ZeeslagFrame extends JFrame implements Observer {
 	
 	private static final long serialVersionUID = 1L;
 	private BoardPanel boardPlayer, boardOpponent;
-	private JLabel player1, player2;
+	private JPanel controlPanel;
+	private JLabel player1;
+	private String name = (String) JOptionPane.showInputDialog(null, "Please enter username", "Please enter username", JOptionPane.QUESTION_MESSAGE,null,null,"player1");
+	private JLabel player2 = new JLabel("Computer");
 	private JPanel mainPanel = new JPanel();
 	private JComboBox<SchipType> schepen = new JComboBox<SchipType>(SchipType.values());
 	private JRadioButton horizontaal = new JRadioButton("Horizontaal");
@@ -30,8 +33,6 @@ public class ZeeslagFrame extends JFrame implements Observer {
 	private JButton start = new JButton("Start spel");
 	private JButton score = new JButton("score spel");
 	
-	private int scorePlayer, scoreOpponent;
-
 	public ZeeslagFrame(BoardPanel board, BoardPanel boardOpponant){
 		super();
 		this.setSize( 800, 300 );
@@ -43,7 +44,7 @@ public class ZeeslagFrame extends JFrame implements Observer {
 	}
 	
 	public void addControlPanel() {
-		JPanel controlPanel = new JPanel();
+		controlPanel = new JPanel();
 		controlPanel.setLayout(new GridLayout(9,1));
 		
 		JLabel beschikbaar = new JLabel("Beschikbare schepen");
@@ -69,8 +70,7 @@ public class ZeeslagFrame extends JFrame implements Observer {
 		score.setEnabled(false);
 		controlPanel.add(score);
 		
-		player1 = new JLabel((String) JOptionPane.showInputDialog(null, "Please enter username", "Please enter username", JOptionPane.QUESTION_MESSAGE,null,null,"player1") + " score: " + scorePlayer);
-		player2 = new JLabel("Computer: score: " + scoreOpponent);
+		player1 = new JLabel(name);
 		controlPanel.add(player1);
 		controlPanel.add(player2);
 		
@@ -97,6 +97,10 @@ public class ZeeslagFrame extends JFrame implements Observer {
 		 return boardPlayer;
 	 }
 	 
+	 public void repaintControlPanel() {
+		 controlPanel.repaint();
+	 }
+	 
 	 public BoardPanel getBoardOpponent(){
 		 return boardOpponent;
 	 }
@@ -119,10 +123,20 @@ public class ZeeslagFrame extends JFrame implements Observer {
 		 }
 		 else return Richting.VERTICAAL;
 	 }
+	 
+	 public String getPlayer1() {
+		 return player1.getText();
+	 }
+	 
+	 public String getPlayer2() {
+		 return player2.getText();
+	 }
 
 	public void update(int scorePlayer, int scoreOpponent) {
-		this.scorePlayer = scorePlayer;
-		this.scoreOpponent = scoreOpponent;
+		remove(player1);
+		remove(player2);
+		player1.setText(name + ": Score: " + scorePlayer);
+		player2.setText("Computer: Score: " + scoreOpponent);
 	}
 
 }

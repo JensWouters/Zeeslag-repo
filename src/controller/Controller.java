@@ -44,11 +44,13 @@ private SpelState GestartState = new GestartState();
 		view.getStartKnop().addMouseListener(new PlaatsSchipOpponentHandler());
 		view.getBoardOpponent().addMouseListener(new AttackSchepenHandler());
 		view.getBoardOpponent().addMouseListener(new AttackSchepenRandomComputerHandler());
+		view.getBoardOpponent().addMouseListener(new ScoreHandler());
+		view.getBoardPlayer().addMouseListener(new ScoreHandler());
 	}
 	
 	private class ScoreHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event){
-			service.getSpel().notifyObserver();
+			service.getSpel().notifyObservers();
 			view.repaint();
 		}
 	}
@@ -56,12 +58,12 @@ private SpelState GestartState = new GestartState();
 	private class PlaatsSchipHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event) {
 			if (service.getSpel().getState() == NieuwState ) {
-			Position positie = new Position(event.getX(), event.getY());
-			service.plaatsSchip(view.getRichting(), view.getSchip(), positie);
-			view.getBoardPlayer().repaint();
-			if (boardPanelPlayer.getSchepenOpBoard() == 5){
-				view.getStartKnop().setEnabled(true);
-			}
+				Position positie = new Position(event.getX(), event.getY());
+				service.plaatsSchip(view.getRichting(), view.getSchip(), positie);
+				view.getBoardPlayer().repaint();
+				if (boardPanelPlayer.getSchepenOpBoard() == 5){
+					view.getStartKnop().setEnabled(true);
+				}
 			}
 			
 		}
@@ -86,9 +88,9 @@ private SpelState GestartState = new GestartState();
 			int x = event.getX();
 			int y = event.getY();
 			Position position = new Position(x,y);
-			service.getBoardOpponent().attackSchip(position);
-			view.getBoardOpponent().repaint();
-			System.out.println(service.getBoard().getScore());
+			service.getBoardOpponent().attackSchip(position, service.getBoardOpponent());
+			/*System.out.println(service.getBoard().getScore());
+			System.out.println(service.getBoardOpponent().getScore());*/
 		}
 	}
 	}
@@ -101,7 +103,6 @@ private SpelState GestartState = new GestartState();
 					AanvalStrategy strategy = new RandomAanvalStrategy(service.getBoard());
 					strategy.attackSchipComputer(service.getBoard());
 					view.getBoardPlayer().repaint();
-					System.out.println(strategy.getScore());
 				}
 			
 			}

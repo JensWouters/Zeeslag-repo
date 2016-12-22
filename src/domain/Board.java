@@ -104,6 +104,9 @@ public class Board {
 		return score;
 	}
 	
+	public void lowerScore() {
+		score--;
+	}
 	
 	public void setBezet(int nr) {
 		this.getVierkanten().get(nr).setBezet();
@@ -247,7 +250,7 @@ public class Board {
 		 } else { JOptionPane.showMessageDialog(null, "Je mag maar 5 schepen plaatsen!"); } 
 	 }
 	 
-	 public void attackSchip(Position position){
+	 public void attackSchip(Position position, Board board){
 
 		 int nr = getNummer(position);
 		 Vierkant vierkant = this.getVierkanten().get(nr);
@@ -260,8 +263,7 @@ public class Board {
 					 killSchip(coordinaten);
 				 }
 				 this.setBeurt(true);
-				 this.score--;
-			 
+				 board.lowerScore();
 			 }else{
 				 this.setKleur(nr, Color.BLUE);
 				 this.setBeurt(true);

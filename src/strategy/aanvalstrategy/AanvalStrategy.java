@@ -12,7 +12,5 @@ public interface AanvalStrategy {
 	public boolean isKilled(List<Integer> coordinaten);
 	public List<Integer> getAangevallenSchip(int nr);
 	public void coordinatenPerSchip(List<Integer> coordinaten);
-	public int getScore();
-	public int getDeadShips();
 
 }

@@ -39,7 +39,7 @@ public class Spel implements Subject {
 	}
 	
 	public void attackSchip(Position position){
-		boardOpponent.attackSchip(position);
+		boardOpponent.attackSchip(position, boardOpponent);
 	}
 	
 	public int getScorePlayer() {
@@ -54,12 +54,13 @@ public class Spel implements Subject {
 		observers.add(o);
 	}
 
-	public void notifyObserver() {
+	public void notifyObservers() {
 		int scorePlayer = this.getScorePlayer();
 		int scoreOpponent = this.getScoreOpponent();
 		for (Observer o : observers) {
 			o.update(scorePlayer, scoreOpponent);
 		}
 		System.out.println(scorePlayer);
+		System.out.println(scoreOpponent);
 	}
 }
