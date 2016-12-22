@@ -66,16 +66,15 @@ public class ZeeslagFrame extends JFrame {
 		controlPanel.add(score);
 		
 		player1 = new JLabel((String) JOptionPane.showInputDialog(null, "Please enter username", "Please enter username", JOptionPane.QUESTION_MESSAGE,null,null,"player1"));
-		controlPanel.add(player1);
-		
 		player2 = new JLabel("Computer");
+		controlPanel.add(player1);
 		controlPanel.add(player2);
 		
 		mainPanel.add(controlPanel);
 	}
 	
-	public void addPlayerBoards(BoardPanel bord, BoardPanel bordOpponant) {
-		player1 = new JLabel((String) JOptionPane.showInputDialog(null, "Please enter username", "Please enter username", JOptionPane.QUESTION_MESSAGE,null,null,"player1")); 
+	public void addPlayerBoards(BoardPanel bord, BoardPanel bordOpponent) {
+		 
 		boardPlayer = bord;
 		boardPlayer.setBackground(Color.GRAY);
 		boardPlayer.setSize(new Dimension(400,400));
@@ -83,13 +82,12 @@ public class ZeeslagFrame extends JFrame {
 		boardPlayer.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		mainPanel.add(boardPlayer);
 		
-		player2 = new JLabel("Computer");
-		boardOpponant = bordOpponant;
-		boardOpponant.setBackground(Color.GRAY);
-		boardOpponant.setSize(new Dimension(400,400));
-		boardOpponant.setLocation(475,50);
-		boardOpponant.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		mainPanel.add(boardOpponant);
+		boardOpponent = bordOpponent;
+		boardOpponent.setBackground(Color.GRAY);
+		boardOpponent.setSize(new Dimension(400,400));
+		boardOpponent.setLocation(475,50);
+		boardOpponent.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		mainPanel.add(boardOpponent);
 	}
 	 public BoardPanel getBoardPlayer(){
 		 return boardPlayer;

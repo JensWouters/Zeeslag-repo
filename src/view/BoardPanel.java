@@ -1,10 +1,13 @@
 package view;
 
-import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.util.List;
 
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 import domain.Board;
 import domain.Vierkant;
@@ -33,7 +36,7 @@ public class BoardPanel extends JPanel{
 	
 	 public void paintComponent( Graphics g ){
 	      super.paintComponent( g ); // call superclass's paintComponent
-	      this.setBackground( Color.WHITE );
+	      this.setBackground(UIManager.getColor ( "Panel.background" ));
 	      for (Vierkant vierkant: board.getVierkanten()){
 	    	  vierkant.paint(g);
 	      }

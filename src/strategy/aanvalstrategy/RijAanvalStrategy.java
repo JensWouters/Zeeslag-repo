@@ -4,10 +4,9 @@ import java.awt.Color;
 import java.util.List;
 
 import domain.Board;
-import domain.Position;
 import domain.Vierkant;
 
-public class RandomAanvalStrategy implements AanvalStrategy{
+public class RijAanvalStrategy implements AanvalStrategy{
 	Board board;
 	
 	private List<Integer> schip1;
@@ -17,29 +16,20 @@ public class RandomAanvalStrategy implements AanvalStrategy{
 	private List<Integer> schip5;
 	
 	private int deadShips = 0;
-	private int score;
+	private int nr = 0;
 	
-	public RandomAanvalStrategy(Board board) {
+	public RijAanvalStrategy(Board board) {
 		setBoard(board);
 	}
 
 	private void setBoard(Board board) {
 		this.board = board;
 	}
-	
-	public int getScore() {
-		return this.score;
-	}
-	
 	public void attackSchipComputer(Board board) {
-	 	int a = (int)(Math.random() *100);
-		Vierkant vierkant = board.getVierkanten().get(a);
-		Position position = vierkant.getPositie();
-		int nr = board.getNummer(position);
+		Vierkant vierkant = board.getVierkanten().get(nr);
 		 if(vierkant.getKleur().equals(Color.LIGHT_GRAY) || vierkant.getKleur().equals(Color.WHITE)){
 		 	if(board.getVierkanten().get(nr).getBezetSchip() == true){
 	 			board.setKleur(nr, Color.GREEN);
-	 			score--;
 	 			List<Integer> coordinaten = getAangevallenSchip(nr);
 				board.getVierkanten().get(nr).setHit();
 				if (isKilled(coordinaten)) {
@@ -50,8 +40,10 @@ public class RandomAanvalStrategy implements AanvalStrategy{
  				board.setKleur(nr, Color.BLUE);
  			}
 		 } else {
+			 nr++;
 			this.attackSchipComputer(board);
 		 }
+		 nr++;
 	}
 	
 	 public void killSchip(List<Integer> coordinaten) {
@@ -99,7 +91,10 @@ public class RandomAanvalStrategy implements AanvalStrategy{
 		schip4 = coordinaten.subList(sizeSchip1+sizeSchip2+sizeSchip3, sizeSchip1+sizeSchip2+sizeSchip3+sizeSchip4);
 		schip5 = coordinaten.subList(sizeSchip1+sizeSchip2+sizeSchip3+sizeSchip4, board.getCoordinatenVanSchepen().size());
 	}
+
+	public int getScore() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
-
-
-

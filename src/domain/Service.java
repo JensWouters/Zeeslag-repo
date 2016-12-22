@@ -4,29 +4,32 @@ package domain;
 
 public class Service implements ServiceInterface {
 	
-	private Board board;
-	private Board boardOpponent;
+
+	private Spel spel;
 	
 	public Service() {
-		this.board = new Board(25,10);
-		this.boardOpponent = new Board(25,10);
+		spel = new Spel();
 	}
 
 	public void plaatsSchip(Richting richting, SchipType schip, Position positie) {
-		board.plaatsSchip(richting, schip, positie);
+		spel.plaatsSchip(richting, schip, positie);
 	}
 
 
 	public Board getBoard() {
-		return board;
+		return spel.getBoard();
 	}
 	
-	public Board getBoardOpponant() {
-		return this.boardOpponent;
+	public Spel getSpel(){
+		return spel;
+	}
+	
+	public Board getBoardOpponent() {
+		return spel.getBoardOpponent();
 	}
 	
 	public void attackSchip(Position position){
-		boardOpponent.attackSchip(position);
+		spel.getBoardOpponent().attackSchip(position);
 	}
 	
 	
