@@ -17,6 +17,7 @@ import strategy.RandomStrategy;
 import strategy.SpelStrategy;
 import strategy.aanvalstrategy.AanvalStrategy;
 import strategy.aanvalstrategy.RandomAanvalStrategy;
+import strategy.aanvalstrategy.RijAanvalStrategy;
 import view.BoardPanel;
 import view.ZeeslagFrame;
 
