@@ -100,35 +100,35 @@ private SpelState GestartState = new GestartState();
 	
 	private class AttackSchepenHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event){
-			if (service.getBoard().getDeadShips() == 5 || service.getBoardOpponent().getDeadShips() == 5) {
-				endGame();
-			} else {
 				if(service.getSpel().getState() == GestartState){
 				int x = event.getX();
 				int y = event.getY();
 				Position position = new Position(x,y);
 				service.getBoardOpponent().attackSchip(position, service.getBoardOpponent());
+				view.getBoardOpponent().repaint();
 				}
-			}
+				if (service.getBoardOpponent().getDeadShips() == 5) {
+					endGame();
+				} 
+				
 		}
 	}
 	
 	private class AttackSchepenRandomComputerHandler extends MouseAdapter{
 		public void mouseClicked(MouseEvent event){
-
-
-			if (service.getBoard().getDeadShips() == 5 || service.getBoardOpponent().getDeadShips() == 5) {
-				endGame();
-			} else {
+			
 				if(service.getSpel().getState() == GestartState){
 					if(service.getBoardOpponent().getBeurt()){
 						AanvalStrategy strategy = new RandomAanvalStrategy(service.getBoard());
 						strategy.attackSchipComputer(service.getBoard());
 						view.getBoardPlayer().repaint();
-					}
-
 				}
+					
 			}
+				if (service.getBoard().getDeadShips() == 5) {
+					endGame();
+				} 
+				
 		}
 	}
 }
