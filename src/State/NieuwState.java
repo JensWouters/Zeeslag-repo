@@ -1,5 +1,7 @@
 package State;
-
+/*
+ * @Author Gezamenlijk gemaakt
+ */
 import domain.Board;
 
 public class NieuwState implements SpelState{

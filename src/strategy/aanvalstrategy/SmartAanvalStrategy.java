@@ -1,5 +1,7 @@
 package strategy.aanvalstrategy;
-
+/*
+ * @Author Gezamenlijk gemaakt
+ */
 import java.util.List;
 
 import domain.Board;

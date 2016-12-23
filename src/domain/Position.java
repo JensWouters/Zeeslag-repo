@@ -1,5 +1,7 @@
 package domain;
-
+/*
+ * @Author Gezamenlijk gemaakt
+ */
 public class Position {
 	
 	int x, y;

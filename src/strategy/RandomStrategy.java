@@ -1,6 +1,7 @@
 package strategy;
-
-
+/*
+ * @Author Gezamenlijk gemaakt
+ */
 import java.awt.Color;
 
 import domain.Board;

@@ -1,5 +1,7 @@
 package view;
-
+/*
+ * @Author Gezamenlijk gemaakt
+ */
 import java.awt.Graphics;
 import java.util.List;
 
