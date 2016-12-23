@@ -15,7 +15,6 @@ public class RijAanvalStrategy implements AanvalStrategy{
 	private List<Integer> schip4;
 	private List<Integer> schip5;
 	
-	private int deadShips = 0;
 	private int nr = 0;
 	
 	public RijAanvalStrategy(Board board) {
@@ -34,6 +33,7 @@ public class RijAanvalStrategy implements AanvalStrategy{
 				board.getVierkanten().get(nr).setHit();
 				if (isKilled(coordinaten)) {
 					killSchip(coordinaten);
+					board.shipDied();
 				}
 		 			
  			}else {
@@ -50,7 +50,6 @@ public class RijAanvalStrategy implements AanvalStrategy{
 		 for (Integer i : coordinaten) {
 			 board.setKleur(i, Color.RED);
 		 }
-		 deadShips++;
 	 }
 
 	public boolean isKilled(List<Integer> coordinaten) {
@@ -91,14 +90,4 @@ public class RijAanvalStrategy implements AanvalStrategy{
 		schip4 = coordinaten.subList(sizeSchip1+sizeSchip2+sizeSchip3, sizeSchip1+sizeSchip2+sizeSchip3+sizeSchip4);
 		schip5 = coordinaten.subList(sizeSchip1+sizeSchip2+sizeSchip3+sizeSchip4, board.getCoordinatenVanSchepen().size());
 	}
-
-	public int getScore() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int getDeadShips() {
-		return deadShips;
-	}
-
 }
