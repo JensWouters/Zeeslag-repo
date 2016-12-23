@@ -47,8 +47,10 @@ private SpelState GestartState = new GestartState();
 		String winnaar;
 		if (service.getBoard().getScore() > service.getBoardOpponent().getScore()) {
 			winnaar = view.getNamePlayer() + " heeft het spel gewonnen met een score van: " + service.getBoard().getScore(); 
-		} else {
+		} else if (service.getBoard().getScore() < service.getBoardOpponent().getScore()){
 			winnaar = view.getNameOpponent() + " heeft het spel gewonnen met een score van: " + service.getBoardOpponent().getScore(); 
+		} else {
+			winnaar = "Het is gelijkspel";
 		}
 		return "Game Over! Alle schepen zijn gezonken! \n" + winnaar;
 	}
