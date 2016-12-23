@@ -196,17 +196,37 @@ public class Board {
 	 public void setOmliggendeBezet(int nr) {
 		 List<Vierkant> vierkanten = this.getVierkanten();
 		 if (nr % 10 == 0) {
-			 vierkanten.get(nr+1).setBezet();
-			 vierkanten.get(nr-10).setBezet();
-			 vierkanten.get(nr-9).setBezet();
-			 vierkanten.get(nr+10).setBezet();
-			 vierkanten.get(nr+11).setBezet();
+			 try {
+				 vierkanten.get(nr+1).setBezet();
+			 } catch(Exception e) {}
+			 try {
+				 vierkanten.get(nr-10).setBezet();
+			 } catch(Exception e) {}
+			 try {
+				 vierkanten.get(nr-9).setBezet();
+			 } catch(Exception e) {}
+			 try {
+				 vierkanten.get(nr+10).setBezet();
+			 } catch(Exception e) {}
+			 try {
+				 vierkanten.get(nr+11).setBezet();
+			 } catch(Exception e) {}
 		 } else if (nr % 10 == 9) {
-			 vierkanten.get(nr-10).setBezet();
-			 vierkanten.get(nr+10).setBezet();
-			 vierkanten.get(nr-1).setBezet();
-			 vierkanten.get(nr-9).setBezet();
-			 vierkanten.get(nr+9).setBezet();
+			 try {
+				 vierkanten.get(nr-10).setBezet();
+			 } catch(Exception e) {}
+			 try {
+				 vierkanten.get(nr+10).setBezet();
+			 } catch(Exception e) {}
+			 try {
+				 vierkanten.get(nr-1).setBezet();
+			 } catch(Exception e) {}
+			 try {
+				 vierkanten.get(nr-9).setBezet();
+			 } catch(Exception e) {}
+			 try {
+				 vierkanten.get(nr+9).setBezet();
+			 } catch(Exception e) {}
 		 } else {
 		 	 try {
 			 vierkanten.get(nr-10).setBezet();
