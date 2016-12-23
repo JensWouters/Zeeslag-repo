@@ -108,6 +108,7 @@ private SpelState GestartState = new GestartState();
 				int y = event.getY();
 				Position position = new Position(x,y);
 				service.getBoardOpponent().attackSchip(position, service.getBoardOpponent());
+				view.getBoardOpponent().repaint();
 				}
 			}
 		}
