@@ -1,5 +1,7 @@
 package strategy.aanvalstrategy;
-
+/*
+ * @Author Gezamenlijk gemaakt
+ */
 import java.awt.Color;
 import java.util.List;
 

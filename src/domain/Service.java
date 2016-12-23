@@ -1,7 +1,7 @@
 package domain;
-
-
-
+/*
+ * @Author Gezamenlijk gemaakt
+ */
 public class Service implements ServiceInterface {
 	
 

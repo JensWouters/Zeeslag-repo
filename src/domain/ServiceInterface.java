@@ -1,5 +1,7 @@
 package domain;
-
+/*
+ * @Author Gezamenlijk gemaakt
+ */
 public interface ServiceInterface {
 
 	public void plaatsSchip(Richting richting, SchipType schip, Position positie);

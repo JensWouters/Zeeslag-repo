@@ -1,5 +1,7 @@
 package launcher;
-
+/*
+ * @Author Gezamenlijk gemaakt
+ */
 import controller.Controller;
 
 public class Launcher {

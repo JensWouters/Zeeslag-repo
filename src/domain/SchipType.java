@@ -1,5 +1,7 @@
 package domain;
-
+/*
+ * @Author Gezamenlijk gemaakt
+ */
 import java.util.Random;
 
 public enum SchipType {

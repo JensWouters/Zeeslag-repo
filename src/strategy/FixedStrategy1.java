@@ -1,5 +1,7 @@
 package strategy;
-
+/*
+ * @Author Gezamenlijk gemaakt
+ */
 import domain.Board;
 
 

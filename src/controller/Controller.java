@@ -1,5 +1,7 @@
 package controller;
-
+/*
+ * @Author Gezamenlijk gemaakt
+ */
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

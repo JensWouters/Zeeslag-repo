@@ -1,6 +1,7 @@
 package domain;
-
-
+/*
+ * @Author Gezamenlijk gemaakt
+ */
 import State.SpelState;
 
 
