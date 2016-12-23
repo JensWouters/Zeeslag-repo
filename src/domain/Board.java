@@ -46,6 +46,8 @@ public class Board {
 		return vierkanten;
 	}
 	
+
+	
 	public int getSchepenOpBoard() {
 		return schepenOpBoard;
 	}
@@ -193,30 +195,64 @@ public class Board {
 	 
 	 public void setOmliggendeBezet(int nr) {
 		 List<Vierkant> vierkanten = this.getVierkanten();
-	 	 try {
-		 vierkanten.get(nr-10).setBezet();
-	 	 } catch (IndexOutOfBoundsException e) {}
-		 try {
-		 vierkanten.get(nr+10).setBezet();
-		 } catch (IndexOutOfBoundsException e) {}
-		 try {
-		 vierkanten.get(nr-1).setBezet();
-		 } catch (IndexOutOfBoundsException e) {}
-		 try {
-		 vierkanten.get(nr+1).setBezet();
-		 } catch (IndexOutOfBoundsException e) {}
-		 try {
-		 vierkanten.get(nr-9).setBezet();
-		 } catch (IndexOutOfBoundsException e) {}
-		 try {
-		 vierkanten.get(nr+9).setBezet();
-		 } catch (IndexOutOfBoundsException e) {}
-		 try {
-		 vierkanten.get(nr-11).setBezet();
-		 } catch (IndexOutOfBoundsException e) {}
-		 try {
-		 vierkanten.get(nr+11).setBezet();
-		 } catch (IndexOutOfBoundsException e) {}
+		 if (nr % 10 == 0) {
+			 try {
+				 vierkanten.get(nr+1).setBezet();
+			 } catch(Exception e) {}
+			 try {
+				 vierkanten.get(nr-10).setBezet();
+			 } catch(Exception e) {}
+			 try {
+				 vierkanten.get(nr-9).setBezet();
+			 } catch(Exception e) {}
+			 try {
+				 vierkanten.get(nr+10).setBezet();
+			 } catch(Exception e) {}
+			 try {
+				 vierkanten.get(nr+11).setBezet();
+			 } catch(Exception e) {}
+		 } else if (nr % 10 == 9) {
+			 try {
+				 vierkanten.get(nr-10).setBezet();
+			 } catch(Exception e) {}
+			 try {
+				 vierkanten.get(nr+10).setBezet();
+			 } catch(Exception e) {}
+			 try {
+				 vierkanten.get(nr-1).setBezet();
+			 } catch(Exception e) {}
+			 try {
+				 vierkanten.get(nr-9).setBezet();
+			 } catch(Exception e) {}
+			 try {
+				 vierkanten.get(nr+9).setBezet();
+			 } catch(Exception e) {}
+		 } else {
+		 	 try {
+			 vierkanten.get(nr-10).setBezet();
+		 	 } catch (IndexOutOfBoundsException e) {}
+			 try {
+			 vierkanten.get(nr+10).setBezet();
+			 } catch (IndexOutOfBoundsException e) {}
+			 try {
+			 vierkanten.get(nr-1).setBezet();
+			 } catch (IndexOutOfBoundsException e) {}
+			 try {
+			 vierkanten.get(nr+1).setBezet();
+			 } catch (IndexOutOfBoundsException e) {}
+			 try {
+			 vierkanten.get(nr-9).setBezet();
+			 } catch (IndexOutOfBoundsException e) {}
+			 try {
+			 vierkanten.get(nr+9).setBezet();
+			 } catch (IndexOutOfBoundsException e) {}
+			 try {
+			 vierkanten.get(nr-11).setBezet();
+			 } catch (IndexOutOfBoundsException e) {}
+			 try {
+			 vierkanten.get(nr+11).setBezet();
+			 } catch (IndexOutOfBoundsException e) {}
+		 }
 	 }
 	 
 	 // Einde controle functies

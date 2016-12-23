@@ -1,5 +1,9 @@
 package domain;
 
+
+import State.SpelState;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,3 +66,4 @@ public class Spel implements Subject {
 		}
 	}
 }
+
